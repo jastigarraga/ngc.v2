@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Title = "Clientes";
+}
+<div layout="row" layout-align="center center" flex ng-controller="MerakiCustomerController">
+    <div class="md-whiteframe-1dp" flex="90" flex-md="90" flex-lg="90" layout="column">
+        <md-toolbar class="md-primary" layout-align="center start">
+            Clientes
+        </md-toolbar>
+        <form class="content" layout="column" role="form" flex>
+            <div layout="row">
+                <md-input-container flex="50">
+                    <label>Nombre de Usuario</label>
+                    <input name="Name" ng-model="filter.Name"  md-maxlength="40" md-minlength="4" />
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>Primer Apellido</label>
+                    <input name="Surname1" type="text" ng-model="filter.Surname1"  md-maxlength="40" md-minlength="4" />
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container flex="50">
+                    <label>Segundo Apellido</label>
+                    <input name="Surname2" type="text" ng-model="filter.Surname2" md-maxlength="40" md-minlength="4" />
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>Email</label>
+                    <input name="Surname1" type="email" ng-model="filter.Email"  md-maxlength="40" md-minlength="4" />
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container flex="50">
+                    <label>Fecha</label>
+                    <md-datepicker ng-model="filter.Date"></md-datepicker>
+                </md-input-container>
+                <div flex="50" layout="row" layout-align="end center">
+                    <md-button flex="none" class="md-raised" ng-click="read()"><i class="fa fa-search"></i> Filtrar</md-button>
+                </div>
+            </div>
+            <div meraki-grid="grid" ng-model="table" layout="column" layout-align="stretch">
+
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{ 
+    <script src="~/app/meraki-grid/meraki-grid.js"></script>
+}

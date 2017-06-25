@@ -1,0 +1,75 @@
+﻿.meraki-menu-item{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    align-items: stretch;
+}
+.nav-header img{
+    width: 100%;
+    height: auto;
+}
+html{
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+.body-content{
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+#loginForm .content{
+    padding: 2em;
+}
+[meraki-grid]{
+    overflow-y: auto;
+}
+[meraki-grid] table{
+    border-collapse: collapse
+}
+[meraki-grid] thead tr:not(:first-child) th{
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    color: white
+}
+[meraki-grid] tbody td {
+    border-left: 1px solid rgba(0,0,0,.3);
+    border-right: 1px solid rgba(0,0,0,.3);
+}
+[meraki-grid] table{
+    width: 100%;
+}
+[meraki-grid] tfoot td>div {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .2em;
+}
+[meraki-grid] md-input-container {
+    margin: 0;
+}
+[meraki-grid] md-input-container:not(.not-flex){
+    display: flex;
+}
+[meraki-grid] md-select{
+    background:white;
+    color: black;
+}
+[meraki-grid] .ngc-spinner,.meraki-spinner{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999999;
+    background: rgba(0,0,0,.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.config .title-icon{
+    font-size: 2em;
+}

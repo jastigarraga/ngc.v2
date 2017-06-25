@@ -1,0 +1,9 @@
+[
+  {
+    "outputFileName": "wwwroot/app/Meraki.App.js",
+    "inputFiles": [
+      "wwwroot/js/Meraki.App.js",
+      "wwwroot/js/UI/Meraki.UI.js"
+    ]
+  }
+]

@@ -1,0 +1,66 @@
+﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var Routes = {
+            Login: "@Html.Raw(Url.Action("","Login"))",
+            Customers: "@Html.Raw(Url.Action("","Customer"))",
+            Config:"@Html.Raw(Url.Action("","Config"))"
+        };
+        var ApiRoutes= {
+            Customers: "@Html.Raw(Url.Action("customers","api"))",
+            EmailConfig:"@Html.Raw(Url.Action("emailconfig","api"))"
+        }
+            var Templates = {
+            EditorBase:"@Html.Raw(Url.Action("EditorBase","Template"))",
+            ViewBase: "@Html.Raw(Url.Action("ViewBase","Template"))",
+            EditorDate: "@Html.Raw(Url.Action("EditorDate","Template"))",
+            ViewDate: "@Html.Raw(Url.Action("ViewDate","Template"))",
+            MerakiGrid: "@Html.Raw(Url.Action("MerakiGrid","Template"))",
+            MerakiDeleteConfirm: "@Html.Raw(Url.Action("MerakiDeleteConfirm", "Template"))"
+        };
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meraki Estudio: @ViewBag.Title </title>
+    <link rel="stylesheet" href="~/node_modules/angular-material/angular-material.min.css"/>
+    <link rel="stylesheet" href="~/node_modules/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="~/node_modules/angular/angular.min.js"></script>
+    <script src="~/node_modules/angular-route/angular-route.js"></script>
+    <script src="~/node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="~/node_modules/angular-animate/angular-animate.js"></script>
+    <script src="~/node_modules/angular-messages/angular-messages.min.js"></script>
+    <script src="~/node_modules/angular-material/angular-material.js"></script>
+    <script src="~/app/Meraki.App.js"></script>
+</head>
+<body ng-app="MerakiApp" ng-controller="MerakiMainController" layout="column" flex>
+    <md-toolbar  layout="row" layout-align="start center">
+        <md-button flex="none" class="md-raised md-icon-button" ng-click="openSidenav()"><i class="fa fa-bars" aria-hidden="true"></i></md-button>
+    </md-toolbar>
+    <md-sidenav md-component-id="left" class="md-sidenav-left">
+        <header class="nav-header">
+            <a ng-href="/" class="docs-logo" href="/">
+                <img src="~/images/w_meraki-logo-negro.png" alt="Meraki Estudio">
+            </a>
+        </header>
+       <md-list flex>
+           <md-list-item flex class="meraki-menu-item" ng-repeat="item in menu track by $index" layout="row">
+                   <md-button  class="md-no-style" ng-click="item.action()">
+                       <i class="fa" ng-class="item.icon"></i> {{item.text}}
+                   </md-button>
+           </md-list-item>
+       </md-list>
+    </md-sidenav>
+    <md-content class="body-content">
+        @RenderBody()
+    </md-content>
+    <footer>
+        <p>&copy; 2017 - Meraki Estudio</p>
+    </footer>
+    @RenderSection("Scripts",false)
+</body>
+</html>

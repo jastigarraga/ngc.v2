@@ -1,0 +1,81 @@
+﻿@using NGC.Common.Helpers
+@{ 
+    ViewBag.Title = "Configuración";
+    var sslOptions = EmailHelper.GetSecureSocketOptions();
+}
+<div layout="row" flex layout-align="center center" class="config" ng-controller="merakiConfigController" ng-init='sslOptions=@Newtonsoft.Json.JsonConvert.SerializeObject(sslOptions)'>
+    <md-card flex="40">
+        <md-card-header md-colors="{background:'primary'}">
+            <md-card-avatar>
+                <i class="fa fa-envelope title-icon"></i>
+            </md-card-avatar>
+            <md-card-header-text layout="row" layout-align="start center">
+                <h2>Correo</h2>
+            </md-card-header-text>
+        </md-card-header>
+        <md-card-content layout="column" layout-align="stretch">
+            <form name="emailForm" layout="column">
+                <md-input-container>
+                    <label>Servidor</label>
+                    <input mame="Host" required type="text" ng-model="Email.host" />
+                    <div ng-messages="emailForm.Host.$error" role="alert">
+                        <div ng-message="required"  ng-show="emailForm.Host.$error.required">El Campo Host es obligatorio</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>Puerto</label>
+                    <input name="Port" required type="number" ng-model="Email.port" />
+                    <div ng-messages="emailForm.Port.$error" role="alert">
+                        <div ng-message="required" ng-show="emailForm.Port.$error.required">El campo puerto es obligatorio</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>Nombre</label>
+                    <input name="FromName" required type="text" ng-model="Email.fromName" />
+                    <div ng-messages="emailForm.FromName.$error">
+                        <div ng-message="required" ng-show="emailForm.FromName.$error.required">El campo nombre es obligatorio</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>Correo</label>
+                    <input name="From" required type="email" ng-model="Email.from" />
+                    <div ng-messages="emailForm.From.$error">
+                        <div ng-message="required" ng-show="emailForm.From.$error.required">El campo Correo es obligatorio</div>
+                        <div ng-message="email" ng-show="emailForm.From.$error.email">Ha de ser una dirección  válida</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>Usuario</label>
+                    <input name="User" required type="text" ng-model="Email.user" />
+                    <div ng-messages="emailForm.Password.$error" role="alert">
+                        <div ng-message="required" ng-show="emailForm.User.$error.required">El campo usuario es obligatorio</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Contraseña</label>
+                    <input name="Password" required type="text" ng-model="Email.password" />
+                    <div ng-messages="emailForm.Password.$error" role="alert">
+                        <div ng-message="required" ng-show="emailForm.Password.$error.required">El campo contrasñea es obligatorio</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>Ssl</label>
+                    <md-select name="Ssl" required ng-model="Email.socket">
+                        <md-option ng-value="option.Value" ng-repeat="option in sslOptions track by $index">{{option.Text}}</md-option>
+                    </md-select>
+                    <div ng-messages="emailForm.Ssl.$error" role="alert">
+                        <div ng-message="required" ng-show="emailForm.Ssl.$error.required">El campo ssl es obligatorio</div>
+                    </div>
+                </md-input-container>
+            </form>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="center end">
+            <md-button ng-click="saveEmailConfig()">Guardar</md-button>
+            <md-button ng-click="testEmailConfig()">Comprobar</md-button>
+        </md-card-actions>
+    </md-card>
+    <div class="meraki-spinner" ng-if="loading">
+        <md-progress-circular md-mode="indeterminate" md-diameter="200"></md-progress-circular>
+    </div>
+</div>

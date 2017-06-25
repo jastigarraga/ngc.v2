@@ -1,0 +1,28 @@
+﻿@{ 
+    Layout = "_Layout";
+    ViewBag.Title = "Inicio de Sesión";
+}
+<div layout="row" flex-lg="50" flex-md="60" flex="90" layout-align="center center">
+    <form layout="column" id="loginForm" action="@Url.Action("DoLogin","Login")" method="post" flex name="loginForm" class="md-whiteframe-1dp" novalidate>
+        <md-toolbar class="md-primary" layout-align="center start">
+            Inicio de Sesión
+        </md-toolbar>
+        <div class="content" layout="column">
+            <md-input-container>
+                <label>Nombre de Usuario</label>
+                <input name="Login" ng-model="user.Login" required md-maxlength="40" md-minlength="4" />
+                <div ng-messages="loginForm.Login.$error" ng-show="loginForm.Login.$invalid">
+                    <div ng-message="required">El nombre de usuario es obligatorio</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Contraseña</label>
+                <input name="Password" type="password" ng-model="user.Password" required md-maxlength="40" md-minlength="4" />
+                <div ng-messages="loginForm.Password.$error" ng-show="loginForm.Password.$invalid">
+                    <div ng-message="required">La contraseña es obligatoria</div>
+                </div>
+            </md-input-container>
+        </div>
+        <button class="md-button md-primary md-raised">Iniciar</button>
+    </form>
+</div>
