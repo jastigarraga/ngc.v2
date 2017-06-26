@@ -1,0 +1,37 @@
+﻿@{ 
+    Layout = "_Layout";
+    ViewBag.Title = "Editor de Plantillas";
+}
+<div ng-controller="MerakiTemplateEditorController" layout="column" layout-align="strech" flex>
+    <md-card>
+        <md-card-header>
+            <h3>Plantillas</h3>
+        </md-card-header>
+        <md-card-content layout="row">
+            <md-list flex="20">
+                <md-list-item ng-repeat="t in templates track by $index" mg-colors="{background:'accent'}" ng-click="select(t)">{{t.name}}</md-list-item>
+            </md-list>
+            <form flex="80" layout="row">
+                <md-input-container>
+                    <label>
+                        Nombre
+                    </label>
+                    <input type="text" ng-model="template.name"/>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>
+                        Asunto
+                    </label>
+                    <input type="text" ng-model="template.subject" />
+                </md-input-container>
+            </form>
+        </md-card-content>
+        <md-card-actions>
+            <md-button ng-click="new()"><i class="fa fa-file"></i></md-button><md-button ng-click="save()"><i class="fa fa-save"></i></md-button><md-button ng-click="remove()"><i class="fa fa-trash"></i></md-button>
+        </md-card-actions>
+    </md-card>
+    <meraki-editor layout="column" flex ng-model="template.template"></meraki-editor>
+</div>
+@section Scripts{
+    <script src="~/app/meraki-editor/meraki-editor.js"></script>
+}

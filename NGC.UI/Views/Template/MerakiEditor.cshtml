@@ -1,0 +1,81 @@
+﻿
+<md-card flex layout="column">
+    <md-tabs md-selected="selectedTab" md-autoselect="true">
+        <md-tab label="text">
+            <md-tab-label>
+                Texto
+            </md-tab-label>
+        </md-tab>
+        <md-tab label="html">
+            <md-tab-label>
+                Html
+            </md-tab-label>
+        </md-tab>
+    </md-tabs>
+    <md-card-content flex layout="column" ng-show="selectedTab==0">
+        <md-card-actions layout="row" layout-align="start center" layout-wrap>
+            <div layout="row">
+                <div class="md-toolbar-tools groupX-container">
+                    <md-button class="md-raised md-primary groupX left"><i class="fa fa-align-left"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX middle"><i class="fa fa-align-center"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX middle"><i class="fa fa-align-right"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX right"><i class="fa fa-align-justify"></i></md-button>
+                </div>
+            </div>
+            <div layout="row" flex="none">
+                <md-select ng-model="fontFamily" class="no-margin">
+                    <md-option value="Arial">Arial</md-option>
+                    <md-option value="Arial Black">Arial Black</md-option>
+                    <md-option value="Book Antigua">Book Antigua</md-option>
+                    <md-option value="Comic Sans MS">Comic Sans MS</md-option>
+                    <md-option value="Courier New">Courier New</md-option>
+                    <md-option value="Georgia">Georgia</md-option>
+                    <md-option value="Helvetica">Helvetica</md-option>
+                    <md-option value="Impact">Impact</md-option>
+                    <md-option value="Lucida Console">Lucida Console</md-option>
+                    <md-option value="Tahoma">Tahoma</md-option>
+                    <md-option value="Times New Roman">TImes New Roman</md-option>
+                </md-select>
+                <md-select ng-model="fontSize" class="no-margin">
+                    <md-option value="1">1</md-option> 
+                    <md-option value="2">2</md-option>   
+                    <md-option value="3">3</md-option>   
+                    <md-option value="4">4</md-option>   
+                    <md-option value="5">5</md-option>   
+                    <md-option value="6">6</md-option>   
+                    <md-option value="7">7</md-option>   
+                </md-select>
+            </div>
+            <div layout="row">
+                <div class="md-toolbar-tools groupX-container">
+                    <md-button class="md-raised md-primary groupX left" ng-click="execCommand($event,'ol')"><i class="fa fa-list-ol"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX right"><i class="fa fa-list-ul"></i></md-button>
+                </div>
+            </div>
+            <div layout="row">
+                <div class="md-toolbar-tools  groupX-container">
+                    <md-button class="md-raised md-primary groupX left"><i class="fa fa-outdent"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX right"><i class="fa fa-indent"></i></md-button>
+                </div>
+            </div>
+            <div layout="row">
+                <div class="md-toolbar-tools  groupX-container">
+                    <md-button class="md-raised md-primary groupX left" ng-click="execCommand($event,'bold')"><b>N</b></md-button>
+                    <md-button class="md-raised md-primary  groupX middle"><i>C</i></md-button>
+                    <md-button class="md-raised md-primary  groupX right"><u>S</u></md-button>
+                </div>
+            </div>
+            <div layout="row">
+                <div class="md-toolbar-tools  groupX-container">
+                    <md-button class="md-raised md-primary groupX left"><i class="fa fa-link"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX middle"><i class="fa fa-unlink"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX right"><i class="fa fa-image"></i></md-button>
+                </div>
+            </div>
+        </md-card-actions>
+        <iframe flex class="text-iframe"></iframe>
+    </md-card-content>
+    <md-card-content flex layout="column"  ng-show="selectedTab==1">
+        <textarea ng-model="html" flex></textarea>
+    </md-card-content>
+</md-card>

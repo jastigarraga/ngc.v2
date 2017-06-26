@@ -13,6 +13,7 @@ namespace NGC.BLL
             services.AddTransient<ICustomerBLL, CustomerBLL>();
             services.AddTransient<IUserBLL, UserBLL>();
             services.AddTransient<IConfigurationBLL, ConfigurationBLL>();
+            services.AddTransient<IEmailTemplateBLL, EmailTemplateBLL>();
         }
     }
 }

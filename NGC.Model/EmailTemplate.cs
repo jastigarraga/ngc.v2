@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NGC.Model
 {
-    public class EmailTemplate
+    public class EmailTemplate : Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }

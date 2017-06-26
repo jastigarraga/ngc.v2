@@ -8,9 +8,10 @@ using NGC.DAL.Base;
 namespace NGC.DAL.Migrations
 {
     [DbContext(typeof(MerakiContext))]
-    partial class MerakiContextModelSnapshot : ModelSnapshot
+    [Migration("20170626162432_Add_Email_Template")]
+    partial class Add_Email_Template
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");

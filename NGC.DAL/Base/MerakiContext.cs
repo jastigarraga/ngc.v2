@@ -23,6 +23,7 @@ namespace NGC.DAL.Base
             MerakiEntityMappings.MapUser(modelBuilder);
             MerakiEntityMappings.MapCustomer(modelBuilder);
             MerakiEntityMappings.MapConfiguration(modelBuilder);
+            MerakiEntityMappings.MapEmailTemplate(modelBuilder);
         }
     }
 }

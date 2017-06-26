@@ -1,4 +1,7 @@
-angular.module("Meraki.UI",["ngAnimate","ngMaterial"])
+function to_error_string(error) {
+    return typeof error !== "undefined" ? (error.message || error.statusText || error) : "Error desconocido";
+}
+angular.module("Meraki.UI", ["ngAnimate", "ngMaterial"])
 angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
     .config(function ($mdDateLocaleProvider) {
         $mdDateLocaleProvider.formatDate = function (date) {
@@ -33,7 +36,10 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
             },
             {
                 text: "Plantilla",
-                icon: "fa-pencil"
+                icon: "fa-pencil",
+                action: function () {
+                    window.location = Routes.EmailTemplate
+                }
             },
             {
                 text: "Configuración",
@@ -238,6 +244,36 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
                 })
         };
         $scope.loadMailConfig();
-    }]);
+    }])
+    .controller("MerakiTemplateEditorController", ["$scope", "$mdDialog", "$http", function ($scope, $mdDialog, $http) {
+        $scope.templates = [];
+    function loadTemplates() {
+        $scope.loading = true;
+        $http({
+            url: ApiRoutes.Templates
+        }).then(function (response) {
+            $scope.loading = false;
+            $scope.templates = response.data;
+            }, function (error) {
+                $scope.loading = false;
+                var alert = $mdDialog.alert({
+                    title: "Error",
+                    textContent: to_error_string(error),
+                    ok:"Aceptar"
+                });
+                $mdDialog.show(alert).finally(function () {
+                    alert = undefined;
+                });
+            });
+    }
+    $scope.new = function () {
+        $scope.template = { name: "Plantilla nueva" };
+        $scope.templates.push($scope.template);
+    }
+    $scope.select = function (template) {
+        $scope.template = template;
+    }
+    loadTemplates();
+}]);
 
 angular.module("Meraki.UI");

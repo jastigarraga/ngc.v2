@@ -6,11 +6,13 @@
         var Routes = {
             Login: "@Html.Raw(Url.Action("","Login"))",
             Customers: "@Html.Raw(Url.Action("","Customer"))",
-            Config:"@Html.Raw(Url.Action("","Config"))"
+            Config: "@Html.Raw(Url.Action("","Config"))",
+            EmailTemplate: "@Html.Raw(Url.Action("","Template"))"
         };
         var ApiRoutes= {
             Customers: "@Html.Raw(Url.Action("customers","api"))",
-            EmailConfig:"@Html.Raw(Url.Action("emailconfig","api"))"
+            EmailConfig: "@Html.Raw(Url.Action("emailconfig","api"))",
+            Templates: "@Html.Raw(Url.Action("templates","api"))"
         }
             var Templates = {
             EditorBase:"@Html.Raw(Url.Action("EditorBase","Template"))",
@@ -18,7 +20,7 @@
             EditorDate: "@Html.Raw(Url.Action("EditorDate","Template"))",
             ViewDate: "@Html.Raw(Url.Action("ViewDate","Template"))",
             MerakiGrid: "@Html.Raw(Url.Action("MerakiGrid","Template"))",
-            MerakiDeleteConfirm: "@Html.Raw(Url.Action("MerakiDeleteConfirm", "Template"))"
+            MerakiEditor: "@Html.Raw(Url.Action("MerakiEditor","Template"))"
         };
     </script>
 

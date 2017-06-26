@@ -73,3 +73,34 @@ html{
 .config .title-icon{
     font-size: 2em;
 }
+.groupX {
+    font-size: 16px;
+    margin:  0 !important;
+    padding: 0 !important;
+    text-transform: none;
+    font-weight: 400;
+    height:unset!important;
+    min-width: 100px;
+}
+
+.md-button.left {
+    border-radius: 10px 0 0 10px;
+    border-right: 1px solid;
+}
+
+.md-button.middle {
+    border-radius: 0;
+    border-right: 1px solid;
+}
+.md-button.right {
+    border-radius: 0 10px 10px 0;
+}
+.groupX-container{
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    height: unset !important;
+    padding-top:.2em
+}
+.no-margin{
+    margin: 0 !important;
+}

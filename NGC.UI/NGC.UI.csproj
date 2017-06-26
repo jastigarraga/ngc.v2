@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\app\meraki-editor\meraki-editor.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="wwwroot\app\meraki-grid\meraki-grid.js" />
     <Content Update="wwwroot\app\meraki-grid\meraki.grid.template.html" />
     <Content Update="wwwroot\js\Meraki.App.js" />

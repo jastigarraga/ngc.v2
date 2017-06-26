@@ -42,5 +42,20 @@ namespace NGC.DAL.Base
                 config.Property(u => u.Value).HasColumnName("value").HasColumnType("varchar(40)").HasMaxLength(40);
             });
         }
+        public static void MapEmailTemplate(ModelBuilder builder)
+        {
+            builder.Entity<EmailTemplate>(cfg=> {
+                cfg.ForMySqlToTable("emailtemplate");
+                cfg.HasKey(e => e.Id);
+
+
+                cfg.Property(e => e.Id).HasColumnName("id");
+                cfg.Property(e => e.Name).HasColumnName("name").HasColumnType("varchar(40)");
+                cfg.Property(e => e.Subject).HasColumnType("subj").HasColumnType("varchar(255)");
+                cfg.Property(e => e.Template).HasColumnName("template").HasColumnType("text");
+
+
+            });
+        }
     }
 }
