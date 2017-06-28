@@ -61,32 +61,11 @@
                         function () {
                             $mdDialog.hide();
                         });
-                }
-                /*s.delete = function (index) {
-                    s.cancel();
-                    if (confirm("¿Seguro que desea eliminar el registro?")) {
-                        s.loading = true;
-                        var d = ((s.table.transport || {}).delete || {});
-                        if (d.url) {
-                            $http({
-                                url: d.url,
-                                method: d.method || "POST",
-                                data: (s.table.rows[index]),
-                                headers: { 'Content-Type': 'application/json' }
-                            }).then(function (response) {
-                                s.table.rows.splice(index, 1);
-                                s.loading = false;
-                            }, function (error) {
-                                alert(JSON.stringify(error));
-                                s.loading = false;
-                            })
-                        } else {
-                            s.table.rows.splice(index, 1);
-                            s.loading = false;
-                        }
-                    }
+                };
+                s.openDialogEditDialog = function () {
 
-                };*/
+                }
+                
                 s.insert = function () {
                     var r = ((s.table.transport || {}).insert || {});
                     s.loading = true;

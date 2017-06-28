@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using NGC.DAL.Base;
+﻿using NGC.Common.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using NGC.UI.Models;
 using NGC.Model;
@@ -20,16 +15,25 @@ namespace NGC.UI.Controllers
         [HttpPost]
         public  ActionResult DoLogin(UserModel model)
         {
+           
             if(model != null)
             {
                 User user = _userBLL.GetByLogin(model.Login);
-                if(user != null && user.Password == model.Password)
+                if (user != null && user.PasswordVerify(model.Password))
                 {
                     MerakiUser = user;
-                    RedirectToAction("Index", "Home");
+
+                    return Redirect("~/");
                 }
             }
+            ViewBag.Error = "Nombre de usuario y/o contraseña incorrectos";
             return View("Index");
+        }
+        [HttpGet]
+        public ActionResult DoLogOff()
+        {
+            MerakiUser = null;
+            return Redirect(Url.Action("", "Login"));
         }
         [HttpGet]
         public ActionResult Index()

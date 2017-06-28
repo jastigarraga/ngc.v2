@@ -75,6 +75,7 @@ namespace NGC.UI.Controllers
         public EmailTemplate InsertEmailTemplate([FromBody]EmailTemplate model)
         {
             _emailTemplateBLL.Insert(model);
+            _emailTemplateBLL.Save();
             return model;
         }
         [HttpDelete("api/templates")]

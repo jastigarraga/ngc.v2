@@ -30,6 +30,11 @@ namespace NGC.DAL.Base
                 config.Property(u => u.Surname2).HasColumnName("surname_2").HasColumnType("varchar(100)").HasMaxLength(100);
                 config.Property(u => u.Date).HasColumnName("date").HasColumnType("datetime");
                 config.Property(u => u.LastSent).HasColumnName("last_sent").HasColumnType("datetime");
+                config.Property(u => u.ChildrenCount);
+                config.Property(u => u.IdTemplate);
+                config.Property(u => u.Gender);
+                config.Property(u => u.MaritalState).HasColumnType("int");
+                
             });
         }
         public static void MapConfiguration(ModelBuilder modelBuilder)
@@ -54,7 +59,7 @@ namespace NGC.DAL.Base
                 cfg.Property(e => e.Subject).HasColumnType("subj").HasColumnType("varchar(255)");
                 cfg.Property(e => e.Template).HasColumnName("template").HasColumnType("text");
 
-
+                cfg.HasMany(e => e.Customers).WithOne(c => c.Template).HasForeignKey(c => c.IdTemplate).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Restrict);
             });
         }
     }

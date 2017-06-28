@@ -10,5 +10,7 @@ namespace NGC.BLL.Interfaces
     {
         Customer GetById(int id);
         DataSourceResult<Customer> GetByFilters(Customer filter, int page, int pageSize);
+
+        IEnumerable<Customer> GetByDate(DateTime dateTime);
     }
 }

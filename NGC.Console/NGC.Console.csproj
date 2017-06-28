@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NGC.BLL\NGC.BLL.csproj" />
+    <ProjectReference Include="..\NGC.Common\NGC.Common.csproj" />
+    <ProjectReference Include="..\NGC.Model\NGC.Model.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using NGC.DAL.Base;
+using NGC.Model;
 
 namespace NGC.DAL.Migrations
 {
@@ -41,15 +42,24 @@ namespace NGC.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id");
 
+                    b.Property<int>("ChildrenCount");
+
                     b.Property<DateTime?>("Date")
                         .HasColumnName("date")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Email");
 
+                    b.Property<bool>("Gender");
+
+                    b.Property<int>("IdTemplate");
+
                     b.Property<DateTime?>("LastSent")
                         .HasColumnName("last_sent")
                         .HasColumnType("datetime");
+
+                    b.Property<int>("MaritalState")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnName("name")
@@ -67,6 +77,8 @@ namespace NGC.DAL.Migrations
                         .HasMaxLength(100);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdTemplate");
 
                     b.ToTable("Customer");
 
@@ -113,11 +125,20 @@ namespace NGC.DAL.Migrations
                         .HasColumnType("varchar(132)")
                         .HasMaxLength(132);
 
+                    b.Property<string>("Salt");
+
                     b.HasKey("Id");
 
                     b.ToTable("User");
 
                     b.HasAnnotation("MySql:TableName", "user");
+                });
+
+            modelBuilder.Entity("NGC.Model.Customer", b =>
+                {
+                    b.HasOne("NGC.Model.EmailTemplate", "Template")
+                        .WithMany("Customers")
+                        .HasForeignKey("IdTemplate");
                 });
         }
     }

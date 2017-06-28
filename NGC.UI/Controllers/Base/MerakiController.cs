@@ -29,8 +29,15 @@ namespace NGC.UI.Controllers.Base
                 return merakiUser;
             }
             set {
-                Request.HttpContext.User = new System.Security.Claims.ClaimsPrincipal(value);
-                HttpContext.Authentication.SignInAsync("Loged", Request.HttpContext.User).Wait();
+                if (value == null)
+                {
+                    HttpContext.Authentication.SignInAsync("Loged", Request.HttpContext.User);
+                }
+                else
+                {
+                    Request.HttpContext.User = new System.Security.Claims.ClaimsPrincipal(value);
+                    HttpContext.Authentication.SignInAsync("Loged", Request.HttpContext.User).Wait();
+                }
                 merakiUser = value;
             }
         }

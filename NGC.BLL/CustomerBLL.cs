@@ -34,7 +34,13 @@ namespace NGC.BLL
                 Data = customers.Skip((page - 1) * pageSize).Take(pageSize)
             };
         }
-
+        public IEnumerable<Customer> GetByDate(DateTime dateTime)
+        {
+            dateTime = dateTime.Date;
+            DateTime dateFrom = dateTime.AddTicks(-1);
+            DateTime dateTo = dateTime.AddDays(1).AddTicks(-1);
+            return repository.QueryAll.Where(c => c.Date <= dateTo && c.Date >= dateFrom);
+        }
         public Customer GetById(int id)
         {
             return repository.QueryAll.Where(u => u.Id == id).FirstOrDefault();

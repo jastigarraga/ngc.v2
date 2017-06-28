@@ -1,0 +1,17 @@
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.Console.deps.json
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.Console.runtimeconfig.json
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.Console.runtimeconfig.dev.json
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.Console.dll
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.Console.pdb
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.BLL.dll
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.Common.dll
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.DAL.dll
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.Model.dll
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.BLL.pdb
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.Common.pdb
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.Model.pdb
+D:\Proyectos\NGC\NGC.Console\bin\Debug\netcoreapp1.1\NGC.DAL.pdb
+D:\Proyectos\NGC\NGC.Console\obj\Debug\netcoreapp1.1\NGC.Console.csprojResolveAssemblyReference.cache
+D:\Proyectos\NGC\NGC.Console\obj\Debug\netcoreapp1.1\NGC.Console.AssemblyInfo.cs
+D:\Proyectos\NGC\NGC.Console\obj\Debug\netcoreapp1.1\NGC.Console.dll
+D:\Proyectos\NGC\NGC.Console\obj\Debug\netcoreapp1.1\NGC.Console.pdb

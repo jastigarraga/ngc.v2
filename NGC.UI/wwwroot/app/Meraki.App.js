@@ -15,40 +15,26 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
             return day + "/" + month + "/" + year;
         };
     })
-    .controller("MerakiMainController", ["$scope", "$mdSidenav", function ($scope, $mdSidenav) {
+    .controller("MerakiMainController", ["$scope", "$mdSidenav","$mdDialog", function ($scope, $mdSidenav,$mdDialog) {
         $scope.openSidenav = function () {
             $mdSidenav("left").toggle();
         };
-        $scope.menu = [
-            {
-                text: "Iniciar Sesión",
-                icon: "fa-user",
-                action: function () {
-                    window.location = Routes.Login;
-                }
-            },
-            {
-                text: "Clientes",
-                icon: "fa-list",
-                action: function () {
-                    window.location = Routes.Customers
-                }
-            },
-            {
-                text: "Plantilla",
-                icon: "fa-pencil",
-                action: function () {
-                    window.location = Routes.EmailTemplate
-                }
-            },
-            {
-                text: "Configuración",
-                icon: "fa-cog",
-                action: function () {
-                    window.location = Routes.Config
-                }
+        $scope.loginFormSubmit = function (e) {
+            if (!$scope.loginForm.$valid) {
+                e.preventDefault();
+                e.stopPropagation();
+                $scope.loginForm.$setSubmitted(true);
             }
-        ];
+        };
+        $scope.showDialog = function (title, msg, aria) {
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .title(title)
+                    .textContent(msg)
+                    .ariaLabel(aria || "error")
+                    .ok('Aceptar')
+            );
+        };
     }])
     .controller("MerakiCustomerController", function ($scope) {
         function AddParams(Url, params) {

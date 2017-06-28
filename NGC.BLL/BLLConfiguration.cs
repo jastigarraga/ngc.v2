@@ -15,5 +15,10 @@ namespace NGC.BLL
             services.AddTransient<IConfigurationBLL, ConfigurationBLL>();
             services.AddTransient<IEmailTemplateBLL, EmailTemplateBLL>();
         }
+        public static IServiceCollection ConfigureBLL(this IServiceCollection services)
+        {
+            Configure(services);
+            return services;
+        }
     }
 }

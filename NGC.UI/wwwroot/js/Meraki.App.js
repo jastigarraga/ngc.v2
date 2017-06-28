@@ -12,30 +12,19 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
         return day + "/" + month + "/" + year;
     };
 })
-    .controller("MerakiMainController",["$scope","$mdSidenav", function ($scope,$mdSidenav) {
+    .controller("MerakiMainController",["$scope","$mdSidenav","$mdDialog", function ($scope,$mdSidenav,$mdDialog) {
         $scope.openSidenav = function () {
             $mdSidenav("left").toggle();
         };
-        $scope.menu = [
-            {
-                text: "Iniciar Sesión",
-                icon: "fa-user",
-                action: function () {
-                    window.location = Routes.Login;
-                }
-            },
-            {
-                text: "Clientes",
-                icon: "fa-list",
-                action: function () {
-                    window.location = Routes.Customers
-                }
-            },
-            {
-                text: "Plantilla",
-                icon: "fa-pencil"
-            }
-        ];
+        $scope.showDialog = function (title, msg,aria) {
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .title(title)
+                    .textContent(msg)
+                    .ariaLabel(aria ||"error")
+                    .ok('Aceptar')
+            ); 
+        };
     }])
     .controller("MerakiCustomerController", function ($scope) {
         function AddParams(Url, params) {

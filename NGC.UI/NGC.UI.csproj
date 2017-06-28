@@ -244,6 +244,7 @@
     <ProjectReference Include="..\NGC.Model\NGC.Model.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Helper\" />
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
 

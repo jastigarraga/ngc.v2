@@ -8,7 +8,7 @@
             <h3>Plantillas</h3>
         </md-card-header>
         <md-card-content layout="row">
-            <md-list flex="20">
+            <md-list flex="20" class="scroll100y">
                 <md-list-item ng-repeat="t in templates track by $index" mg-colors="{background:'accent'}" ng-click="select(t)">{{t.name}}</md-list-item>
             </md-list>
             <form flex="80" layout="row">

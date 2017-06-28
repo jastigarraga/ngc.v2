@@ -1,5 +1,5 @@
 ﻿angular.module("Meraki.UI")
-    .directive("merakiEditor", function () {
+    .directive("merakiEditor",["$mdDialog", function ($mdDialog) {
         return {
             require: "ngModel",
             scope: {
@@ -7,6 +7,7 @@
             },
             templateUrl: Templates.MerakiEditor,
             link: function (s, e, a, c) {
+                var fileInput = e.find("#fileInput")[0];
                 var text = angular.element(e).find(".text-iframe")[0];
                 text.contentDocument.designMode = "on"
                 c.$render = function () {
@@ -28,9 +29,40 @@
                 s.execCommand = function ($event,com,arg) {
                     text.contentDocument.execCommand(com, false, arg);
                     s.html = text.contentDocument.body.innerHTML;
+                    if ($event) {
+                        $event.preventDefault();
+                        $event.stopPropagation();
+                    }
+                };
+                s.image = function ($event) {
                     $event.preventDefault();
                     $event.stopPropagation();
+                    var imageDialog = $mdDialog.show({
+                        contentElement: "#imageDialog"
+                    });
                 };
+                s.closeDialog = function () {
+                    $mdDialog.hide();
+                };
+                s.insertImage = function (img) {
+                    s.execCommand(null, "insertImage", img);
+                    $mdDialog.hide();
+                };
+                s.openFileDialog = function () {
+                    fileInput.onchange = function () {
+                        if (fileInput.files.length) {
+                            var fileReader = new FileReader();
+                            fileReader.onload = function () {
+                                var image = new Image();
+                                s.insertImage(this.result);
+                                fileInput.onload = null;
+                                angular.element(fileInput).val("");
+                            };
+                            fileReader.readAsDataURL(fileInput.files[0])
+                        }
+                    };
+                    angular.element(fileInput).trigger("click");
+                }
             }
         };
-    });
+    }]);

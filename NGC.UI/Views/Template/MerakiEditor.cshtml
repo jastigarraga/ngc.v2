@@ -16,14 +16,14 @@
         <md-card-actions layout="row" layout-align="start center" layout-wrap>
             <div layout="row">
                 <div class="md-toolbar-tools groupX-container">
-                    <md-button class="md-raised md-primary groupX left"><i class="fa fa-align-left"></i></md-button>
-                    <md-button class="md-raised md-primary  groupX middle"><i class="fa fa-align-center"></i></md-button>
-                    <md-button class="md-raised md-primary  groupX middle"><i class="fa fa-align-right"></i></md-button>
-                    <md-button class="md-raised md-primary  groupX right"><i class="fa fa-align-justify"></i></md-button>
+                    <md-button class="md-raised md-primary groupX left"  ng-click="execCommand($event,'justifyLeft')"><i class="fa fa-align-left"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX middle" ng-click="execCommand($event,'justifyCenter')"><i class="fa fa-align-center"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX middle" ng-click="execCommand($event,'justifyRight')"><i class="fa fa-align-right"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX right"  ng-click="execCommand($event,'justifyFull')"><i class="fa fa-align-justify"></i></md-button>
                 </div>
             </div>
             <div layout="row" flex="none">
-                <md-select ng-model="fontFamily" class="no-margin">
+                <md-select ng-model="fontFamily" class="no-margin" ng-change="execCommand($event,'fontName',fontFamily)">
                     <md-option value="Arial">Arial</md-option>
                     <md-option value="Arial Black">Arial Black</md-option>
                     <md-option value="Book Antigua">Book Antigua</md-option>
@@ -36,7 +36,7 @@
                     <md-option value="Tahoma">Tahoma</md-option>
                     <md-option value="Times New Roman">TImes New Roman</md-option>
                 </md-select>
-                <md-select ng-model="fontSize" class="no-margin">
+                <md-select ng-model="fontSize" class="no-margin" ng-click="execCommand($event,'fontSize',fontSize)">
                     <md-option value="1">1</md-option> 
                     <md-option value="2">2</md-option>   
                     <md-option value="3">3</md-option>   
@@ -48,28 +48,28 @@
             </div>
             <div layout="row">
                 <div class="md-toolbar-tools groupX-container">
-                    <md-button class="md-raised md-primary groupX left" ng-click="execCommand($event,'ol')"><i class="fa fa-list-ol"></i></md-button>
-                    <md-button class="md-raised md-primary  groupX right"><i class="fa fa-list-ul"></i></md-button>
+                    <md-button class="md-raised md-primary groupX left" ng-click="execCommand($event,'insertUnorderedList')"><i class="fa fa-list-ol"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX right" ng-click="execCommand($event,'insertOrderedList')"><i class="fa fa-list-ul"></i></md-button>
                 </div>
             </div>
             <div layout="row">
                 <div class="md-toolbar-tools  groupX-container">
-                    <md-button class="md-raised md-primary groupX left"><i class="fa fa-outdent"></i></md-button>
-                    <md-button class="md-raised md-primary  groupX right"><i class="fa fa-indent"></i></md-button>
+                    <md-button class="md-raised md-primary groupX left" ng-click="execCommand($event,'outdent')"><i class="fa fa-outdent"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX right" ng-click="execCommand($event,'indent')"><i class="fa fa-indent"></i></md-button>
                 </div>
             </div>
             <div layout="row">
                 <div class="md-toolbar-tools  groupX-container">
                     <md-button class="md-raised md-primary groupX left" ng-click="execCommand($event,'bold')"><b>N</b></md-button>
-                    <md-button class="md-raised md-primary  groupX middle"><i>C</i></md-button>
-                    <md-button class="md-raised md-primary  groupX right"><u>S</u></md-button>
+                    <md-button class="md-raised md-primary  groupX middle" ng-click="execCommand($event,'italic')"><i>C</i></md-button>
+                    <md-button class="md-raised md-primary  groupX right" ng-click="execCommand($event,'underlie')"><u>S</u></md-button>
                 </div>
             </div>
             <div layout="row">
                 <div class="md-toolbar-tools  groupX-container">
-                    <md-button class="md-raised md-primary groupX left"><i class="fa fa-link"></i></md-button>
-                    <md-button class="md-raised md-primary  groupX middle"><i class="fa fa-unlink"></i></md-button>
-                    <md-button class="md-raised md-primary  groupX right"><i class="fa fa-image"></i></md-button>
+                    <md-button class="md-raised md-primary groupX left" ng-click="link($event)"><i class="fa fa-link"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX middle" ng-click="execCommand($event,'unlink')"><i class="fa fa-unlink"></i></md-button>
+                    <md-button class="md-raised md-primary  groupX right" ng-click="image($event)"><i class="fa fa-image"></i></md-button>
                 </div>
             </div>
         </md-card-actions>
@@ -79,3 +79,47 @@
         <textarea ng-model="html" flex></textarea>
     </md-card-content>
 </md-card>
+<div style="display:none">
+    <input type="file" accept="image/*" id="fileInput"/>
+<div class="md-dialog-container" id="imageDialog">
+    <md-dialog class="md-padding">
+        <md-dialog-content class="md-padding">
+            <h2>¿Donde se encuentra la imágen?</h2>
+            <md-card>
+                <md-card-header>
+                    <md-card-avatar>
+                        <i class="fa fa-file-image-o"></i>
+                    </md-card-avatar>
+                    <md-card-header-text>
+                        <span class="md-title">En mi ordenador</span>
+                        <span class="md-subhead">La imágen se encuentra en mi disco duro, dispositivo portatil u otro equipo al que accedo por el sistema de archivos</span>
+                    </md-card-header-text>
+                </md-card-header>
+                <md-card-actions>
+                    <md-button md-colors="{background:'primary'}" ng-click="openFileDialog()">Buscar</md-button>
+                </md-card-actions>
+            </md-card>
+            <md-card>
+                <md-card-header>
+                    <md-card-avatar>
+                        <i class="fa fa-globe"></i>
+                    </md-card-avatar>
+                    <md-card-header-text>
+                        <span class="md-title">En una dirección web</span>
+                        <span class="md-suhead">La imágen se encuentra en un servidor al que accedo mediante algún protocolo web (http, ftp...)</span>
+                    </md-card-header-text>
+                </md-card-header>
+                <md-card-actions>
+                    <md-input-container>
+                        <label>Dirección</label>
+                        <input type="url" ng-model="url"/>
+                    </md-input-container>
+                    <md-button md-colors="{background:'primary'}" ng-click="insertImage(url)">Añadir</md-button>
+                </md-card-actions>
+            </md-card>
+        <md-dialog-actions>
+            <md-button ng-click="closeDialog()" md-colors="{background:'primary'}">Cerrar</md-button>
+        </md-dialog-actions>
+    </md-dialog>
+</div>
+</div>

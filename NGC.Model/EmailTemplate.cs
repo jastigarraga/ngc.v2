@@ -11,5 +11,7 @@ namespace NGC.Model
 
         public string Subject { get; set; }
         public string Template { get; set; }
+
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }

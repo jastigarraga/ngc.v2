@@ -1,4 +1,7 @@
 ﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+@{ 
+    var isInLogin = ViewBag.IsInLogin ?? false;
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,10 +42,16 @@
     <script src="~/node_modules/angular-material/angular-material.js"></script>
     <script src="~/app/Meraki.App.js"></script>
 </head>
-<body ng-app="MerakiApp" ng-controller="MerakiMainController" layout="column" flex>
-    <md-toolbar  layout="row" layout-align="start center">
+<body ng-app="MerakiApp" ng-controller="MerakiMainController" layout="column">
+   @if (!isInLogin)
+   {
+    <md-toolbar  layout="row"  flex="none" layout-align="space-between center">
         <md-button flex="none" class="md-raised md-icon-button" ng-click="openSidenav()"><i class="fa fa-bars" aria-hidden="true"></i></md-button>
+        <a flex="none" class="md-button" href="@Html.Raw(Url.Action("DoLogOff", "Login"))">
+            Cerrar Sesión
+        </a>
     </md-toolbar>
+   }
     <md-sidenav md-component-id="left" class="md-sidenav-left">
         <header class="nav-header">
             <a ng-href="/" class="docs-logo" href="/">
@@ -50,10 +59,25 @@
             </a>
         </header>
        <md-list flex>
-           <md-list-item flex class="meraki-menu-item" ng-repeat="item in menu track by $index" layout="row">
-                   <md-button  class="md-no-style" ng-click="item.action()">
-                       <i class="fa" ng-class="item.icon"></i> {{item.text}}
-                   </md-button>
+           <md-list-item flex class="meraki-menu-item">
+               <a class="md-button md-no-style" href="~/">
+                   <i class="fa fa-home"></i> Inicio
+               </a>
+           </md-list-item>
+           <md-list-item flex class="meraki-menu-item" layout="row">
+               <a class="md-button md-no-style" href="~/Customer">
+                   <i class="fa fa-address-book"></i> Clientes
+               </a>
+           </md-list-item>
+           <md-list-item flex class="meraki-menu-item">
+               <a class="md-button md-no-style" href="~/Template">
+                   <i class="fa fa-pencil"></i> Plantillas
+               </a>
+           </md-list-item>
+           <md-list-item>
+               <a class="md-button md-no-style" href="~/Config">
+                   <i class="fa fa-cog"></i> Configuración
+               </a>
            </md-list-item>
        </md-list>
     </md-sidenav>
