@@ -15,8 +15,8 @@ namespace NGC.DAL.Base
 
                 build.Property(u => u.Id).HasColumnName("id").HasColumnType("int");
                 build.Property(u => u.Login).HasColumnType("login").HasColumnType("varchar(40)").HasMaxLength(40);
-                build.Property(u => u.Password).HasColumnName("password").HasColumnType("varchar(132)").HasMaxLength(132);
-
+                build.Property(u => u.Password).HasColumnName("password").HasColumnType("varchar(176)").HasMaxLength(176);
+                build.Property(u => u.Salt).HasColumnType("varbinary(16)");
             });
         }
         public static void MapCustomer(ModelBuilder modelBuilder)

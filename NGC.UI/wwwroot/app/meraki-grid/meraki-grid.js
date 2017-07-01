@@ -62,9 +62,6 @@
                             $mdDialog.hide();
                         });
                 };
-                s.openDialogEditDialog = function () {
-
-                }
                 
                 s.insert = function () {
                     var r = ((s.table.transport || {}).insert || {});

@@ -11,7 +11,7 @@ namespace NGC.Model
         public string Login { get; set; }
         public string Password { get; set; }
 
-        public string Salt { get; set; }
+        public byte[] Salt { get; set; }
 
         public string AuthenticationType => "Simple";
 

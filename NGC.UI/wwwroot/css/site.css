@@ -4,6 +4,13 @@
     margin: 0 !important;
     align-items: stretch;
 }
+.meraki-menu-item a{
+    display: flex;
+    align-items: center !important;
+}
+.meraki-menu-item a i {
+    margin-right: .5em;
+}
 .nav-header img{
     width: 100%;
     height: auto;
@@ -15,47 +22,50 @@ html{
     align-items: stretch;
     justify-content: center;
 }
-.body-content{
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-}
 #loginForm .content{
     padding: 2em;
 }
-[meraki-grid]{
+[meraki-grid], [meraki-popup-grid]{
     overflow-y: auto;
 }
-[meraki-grid] table{
+.meraki-grid{
     border-collapse: collapse
 }
-[meraki-grid] thead tr:not(:first-child) th{
+.meraki-grid thead tr:not(:first-child) th{
     border-left: 1px solid white;
     border-right: 1px solid white;
     color: white
 }
-[meraki-grid] tbody td {
+.meraki-grid tbody td {
     border-left: 1px solid rgba(0,0,0,.3);
     border-right: 1px solid rgba(0,0,0,.3);
 }
-[meraki-grid] table{
-    width: 100%;
+.meraki-grid {
+    min-width: 100%;
 }
-[meraki-grid] tfoot td>div {
+.meraki-grid .md-button{
+    margin: 0;
+}
+.meraki-grid-header{
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+    align-items:center
+}
+.meraki-grid tfoot td>div {
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: .2em;
 }
-[meraki-grid] md-input-container {
+.meraki-grid md-input-container {
     margin: 0;
 }
-[meraki-grid] md-input-container:not(.not-flex){
+.meraki-grid md-input-container:not(.not-flex){
     display: flex;
 }
-[meraki-grid] md-select{
+.meraki-grid md-select{
     background:white;
     color: black;
 }
@@ -70,6 +80,79 @@ html{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+@media (max-width:600px){
+ 
+    .meraki-grid-cell::before {
+        content: attr(data-title);
+    }
+    .meraki-grid tr, .meraki-grid tfoot div{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+    .meraki-grid tfoot span{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .meraki-grid tbody td {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        border: 0 !important;
+        padding-left: .2em;
+        padding-right: .2em;
+    }
+    .meraki-grid tbody tr {
+        margin: 2em 0;
+        box-shadow: 1px 1px 1px black;
+        background: rgb(63, 81, 181) !important;
+        padding-top: .5em;
+    }
+    .meraki-grid tbody td:last-child{
+        justify-content:flex-end;
+        padding-right: 1em;
+    }
+    .meraki-grid-cell {
+        flex: 1;
+        color: white;
+        border-bottom: 1px solid black;
+    }
+    .meraki-grid-cell-content{
+        color: black;
+        background-color: white;
+        min-height: 1.5em;
+        display:flex;
+        align-items:center;
+        padding-left: .3em;
+        box-shadow: 1px 1px 1px black inset;
+    }
+    .meraki-grid tfoot div>span:first-child{
+        order:1;
+    }
+    .meraki-grid thead tr:not(:first-child){
+        display: none;
+        z-index: 1000;
+    }
+    .meraki-grid thead tr:first-child, .meraki-grid thead{
+        background-color: rgba(0,0,0,0);
+    } 
+    .meraki-grid thead tr:first-child .md-button {
+        position: fixed;
+        bottom: 1em;
+        right: 1em;
+    }
+    .meraki-page-button{
+        display:none
+    }
+    md-card-title{
+        align-items: center;
+    }
+    footer{
+        display:none
+    }
 }
 .config .title-icon{
     font-size: 2em;

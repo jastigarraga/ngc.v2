@@ -2,12 +2,19 @@
     Layout = "_Layout";
     ViewBag.Title = "Clientes";
 }
-<div layout="row" layout-align="center center" flex ng-controller="MerakiCustomerController">
-    <div class="md-whiteframe-1dp" flex="90" flex-md="90" flex-lg="90" layout="column">
-        <md-toolbar class="md-primary" layout-align="center start">
-            Clientes
-        </md-toolbar>
-        <form class="content" layout="column" role="form" flex>
+<div layout="row" layout-align-sm="start stretch" flex ng-controller="MerakiCustomerController" flex-sm="100">
+    <md-card flex layout-align-sm="start stretch">
+        <md-card-title  md-colors="{'background-color':'primary'}">
+            <h2>Clientes</h2>
+        </md-card-title>
+        <md-card-content style="overflow:auto">
+            <div meraki-popup-grid="grid" ng-model="customers" layout="column" layout-align="stretch">
+
+            </div>
+        </md-card-content>
+    </md-card>
+</div>
+        @*<form class="content" layout="column" role="form" flex>
             <div layout="row">
                 <md-input-container flex="50">
                     <label>Nombre de Usuario</label>
@@ -36,13 +43,8 @@
                 <div flex="50" layout="row" layout-align="end center">
                     <md-button flex="none" class="md-raised" ng-click="read()"><i class="fa fa-search"></i> Filtrar</md-button>
                 </div>
-            </div>
-            <div meraki-grid="grid" ng-model="table" layout="column" layout-align="stretch">
-
-            </div>
-        </form>
-    </div>
-</div>
+            </div>*@
+        @*</form>*@
 @section Scripts{ 
-    <script src="~/app/meraki-grid/meraki-grid.js"></script>
+    <script src="~/app/meraki-grid/meraki-popup-grid.js"></script>
 }

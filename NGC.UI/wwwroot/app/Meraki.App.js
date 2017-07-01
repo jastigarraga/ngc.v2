@@ -2,6 +2,24 @@ function to_error_string(error) {
     return typeof error !== "undefined" ? (error.message || error.statusText || error) : "Error desconocido";
 }
 angular.module("Meraki.UI", ["ngAnimate", "ngMaterial"])
+    .service('authInterceptor', ["$q","$rootScope", function ($q,$rootScope) {
+        var service = this;
+
+        service.responseError = function (response) {
+            if (response.status == 401) {
+                window.location = Routes.Login;
+            } else if (response.status == 404) {
+                $rootScope.$broadcast("meraki-alert", {
+                    title: "Error 404!!",
+                    message:"No se ha podido encontrar la dirección " + response.config.url
+                });
+            }
+            return $q.reject(response);
+        };
+    }])
+    .config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.interceptors.push('authInterceptor');
+    }])
 angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
     .config(function ($mdDateLocaleProvider) {
         $mdDateLocaleProvider.formatDate = function (date) {
@@ -15,7 +33,16 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
             return day + "/" + month + "/" + year;
         };
     })
-    .controller("MerakiMainController", ["$scope", "$mdSidenav","$mdDialog", function ($scope, $mdSidenav,$mdDialog) {
+    .controller("MerakiMainController", ["$scope", "$mdSidenav", "$mdDialog", function ($scope, $mdSidenav, $mdDialog) {
+        $scope.$on("meraki-alert", function (evt,data) {
+            $mdDialog.show(
+                $mdDialog.alert()
+                    .title(data.title)
+                    .textContent(data.message)
+                    .ariaLabel(data.aria || "error")
+                    .ok("Aceptar")
+            );
+        });
         $scope.openSidenav = function () {
             $mdSidenav("left").toggle();
         };
@@ -37,122 +64,56 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
         };
     }])
     .controller("MerakiCustomerController", function ($scope) {
-        function AddParams(Url, params) {
-            Url += "?";
-            var p = ""
-            for (var key in params) {
-                p += (p !== "" ? "&" : "") + key + "=" + params[key];
-            }
-            return Url + p;
-        }
-        $scope.read = function () {
-            $scope.grid.read();
-        };
-        $scope.customers = [];
-        $scope.filter = {};
-        $scope.table = {
-            pageSize: 5,
-            pageSizes: [
+        $scope.grid = {
+            cols: [
                 {
-                    value: "5"
+                    title: "Email",
+                    name: "email",
+                    width: "120px",
+                    templateUrl: Templates.ViewBase
                 }, {
-                    value: "10"
+                    title: "Fecha",
+                    name: "date",
+                    templateUrl: Templates.ViewDate
                 }, {
-                    value: "20"
+                    title: "Envío",
+                    name: "lastSent",
+                    templateUrl: Templates.ViewDate
+                },
+                {
+                    title: "Nombre",
+                    name: "name",
+                    templateUrl: Templates.ViewBase + "?model=Name"
                 }, {
-                    value: "50"
+                    title: "Primer apellido",
+                    name: "surname1",
+                    templateUrl: Templates.ViewBase
+                }, {
+                    title: "Segundo apellido",
+                    name: "surname2",
+                    templateUrl: Templates.ViewBase
                 }
             ],
-            page: 1,
-            columns: [
-                {
-                    "name": "Name",
-                    header: "Nombre",
-                    templateUrl: AddParams(Templates.ViewBase, {
-                        name: "Name",
-                        model: "name"
-                    }),
-                    editTemplateUrl: AddParams(Templates.EditorBase, {
-                        name: "Name",
-                        model: "name"
-                    })
-                }, {
-                    "name": "Surname1",
-                    header: "Primer Apellido",
-                    templateUrl: AddParams(Templates.ViewBase, {
-                        name: "Surname1",
-                        model: "surname1"
-                    }),
-                    editTemplateUrl: AddParams(Templates.EditorBase, {
-                        name: "Surname1",
-                        model: "surname1"
-                    })
-                }, {
-                    "name": "Surname2",
-                    header: "Segundo Apellido",
-                    templateUrl: AddParams(Templates.ViewBase, {
-                        name: "Surname2",
-                        model: "surname2"
-                    }),
-                    editTemplateUrl: AddParams(Templates.EditorBase, {
-                        name: "Surname2",
-                        model: "surname2"
-                    })
-                }, {
-                    "name": "Email",
-                    header: "Email",
-                    templateUrl: AddParams(Templates.ViewBase, {
-                        name: "Email",
-                        model: "email",
-                        type: "email"
-                    }),
-                    editTemplateUrl: AddParams(Templates.EditorBase, {
-                        name: "Email",
-                        model: "email",
-                        type: "email"
-                    })
-                }, {
-                    "name": "Date",
-                    header: "Fecha",
-                    templateUrl: AddParams(Templates.ViewDate, {
-                        model: "date"
-                    }),
-                    editTemplateUrl: AddParams(Templates.EditorDate, {
-                        model: "date",
-                    })
-                }, {
-                    "name": "LasSent",
-                    header: "Envío",
-                    templateUrl: AddParams(Templates.ViewDate, {
-                        model: "lastSent"
-                    }),
-                    editTemplateUrl: AddParams(Templates.EditorDate, {
-                        model: "lastSent"
-                    })
-                },
-            ],
+            templateUrl: template("MerakiCustomerEditorTemplate"),
             transport: {
                 read: {
-                    url: ApiRoutes.Customers,
-                    data: function (data) {
-                        data.filter = JSON.stringify($scope.filter);
-                        return data;
-                    }
-                },
-                insert: {
-                    url: ApiRoutes.Customers,
-                    method: "PUT"
+                    url: ApiRoutes.Customers
                 },
                 update: {
                     url: ApiRoutes.Customers,
-                    method: "POST"
+                    method:"POST"
+                },
+                insert: {
+                    url: ApiRoutes.Customers,
+                    method:"PUT"
                 },
                 delete: {
                     url: ApiRoutes.Customers,
                     method: "DELETE"
                 }
-            }
-        };
+            },
+            pageSizes:[5,10,20,50]
+        }
     })
     .controller("merakiConfigController", ["$scope", "$http", "$mdDialog", function ($scope, $http, $mdDialog) {
         function askForEmail(cb) {
@@ -233,33 +194,32 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
     }])
     .controller("MerakiTemplateEditorController", ["$scope", "$mdDialog", "$http", function ($scope, $mdDialog, $http) {
         $scope.templates = [];
-    function loadTemplates() {
-        $scope.loading = true;
-        $http({
-            url: ApiRoutes.Templates
-        }).then(function (response) {
-            $scope.loading = false;
-            $scope.templates = response.data;
+        function loadTemplates() {
+            $scope.loading = true;
+            $http({
+                url: ApiRoutes.Templates
+            }).then(function (response) {
+                $scope.loading = false;
+                $scope.templates = response.data;
             }, function (error) {
                 $scope.loading = false;
                 var alert = $mdDialog.alert({
                     title: "Error",
                     textContent: to_error_string(error),
-                    ok:"Aceptar"
+                    ok: "Aceptar"
                 });
                 $mdDialog.show(alert).finally(function () {
                     alert = undefined;
                 });
             });
-    }
-    $scope.new = function () {
-        $scope.template = { name: "Plantilla nueva" };
-        $scope.templates.push($scope.template);
-    }
-    $scope.select = function (template) {
-        $scope.template = template;
-    }
-    loadTemplates();
-}]);
-
+        }
+        $scope.new = function () {
+            $scope.template = { name: "Plantilla nueva" };
+            $scope.templates.push($scope.template);
+        }
+        $scope.select = function (template) {
+            $scope.template = template;
+        }
+        loadTemplates();
+    }]);
 angular.module("Meraki.UI");

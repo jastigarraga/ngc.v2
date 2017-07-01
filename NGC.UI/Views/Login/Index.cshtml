@@ -1,11 +1,13 @@
-﻿@{ 
+﻿@using NGC.UI.Models
+@{ 
     Layout = "_Layout";
     ViewBag.Title = "Inicio de Sesión";
     ViewBag.IsInLogin = true;
 }
+@model UserModel
 <form layout="row" ng-submit="loginFormSubmit($event)" method="post" id="loginForm" action="@Url.Action("DoLogin","Login")" flex name="loginForm" 
       novalidate layout-align="center center" ng-init="@(Html.Raw(string.IsNullOrWhiteSpace(ViewBag.Error)?"":$"showDialog('Error','{ViewBag.Error}')"))">
-    <md-card>
+    <md-card ng-init="@(Html.Raw($"user={{Login:'{Model?.Login}',Password:'{Model?.Password}'}}"))">
         <md-card-heder class="md-padding" md-colors="{'background-color':'primary'}">
             Inicio de sesión
         </md-card-heder>
@@ -13,7 +15,7 @@
             <md-input-container >
                 <label>Nombre de Usuario</label>
                 <input name="Login" ng-model="user.Login" required md-maxlength="40" />
-                <div ng-messages="loginForm.Login.$error" ng-show="loginForm.Login.$invalid">
+                <div ng-messages="loginForm.Login.$error" ng-show="loginForm.Login.$invalid" ng-cloak>
                     <div ng-message="required" ng-show="loginForm.Login.$error.required">El nombre de usuario es obligatorio</div>
                     <div ng-message="md-maxlength" ng-show="loginForm.Login.$error['md-maxlength']">El nombre es demasiado largo</div>
                 </div>
@@ -21,7 +23,7 @@
             <md-input-container>
                 <label>Contraseña</label>
                 <input name="Password" type="password" ng-model="user.Password" required md-maxlength="40" md-minlength="4" />
-                <div ng-messages="loginForm.Password.$error" ng-show="loginForm.Password.$invalid">
+                <div ng-messages="loginForm.Password.$error" ng-show="loginForm.Password.$invalid" ng-cloak>
                     <div ng-message="required" ng-show="loginForm.Password.$error.required">La contraseña es obligatoria</div>
                     <div ng-message="md-maxlength" ng-show="loginForm.Password.$error['md-maxlength']">La contraseña es demasiado larga</div>
                 </div>

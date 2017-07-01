@@ -6,6 +6,9 @@
 <html>
 <head>
     <script>
+        function template(name) {
+            return "@Url.Action("templates","api")/" + name;
+        }
         var Routes = {
             Login: "@Html.Raw(Url.Action("","Login"))",
             Customers: "@Html.Raw(Url.Action("","Customer"))",
@@ -23,7 +26,8 @@
             EditorDate: "@Html.Raw(Url.Action("EditorDate","Template"))",
             ViewDate: "@Html.Raw(Url.Action("ViewDate","Template"))",
             MerakiGrid: "@Html.Raw(Url.Action("MerakiGrid","Template"))",
-            MerakiEditor: "@Html.Raw(Url.Action("MerakiEditor","Template"))"
+            MerakiEditor: "@Html.Raw(Url.Action("MerakiEditor","Template"))",
+            MerakiPopupGrid:"@Html.Raw(Url.Action("MerakiPopupGrid","Template"))"
         };
     </script>
 
@@ -42,7 +46,7 @@
     <script src="~/node_modules/angular-material/angular-material.js"></script>
     <script src="~/app/Meraki.App.js"></script>
 </head>
-<body ng-app="MerakiApp" ng-controller="MerakiMainController" layout="column">
+<body ng-app="MerakiApp" ng-controller="MerakiMainController" layout="column" layout-align-sm="start stretch">
    @if (!isInLogin)
    {
     <md-toolbar  layout="row"  flex="none" layout-align="space-between center">
@@ -52,7 +56,7 @@
         </a>
     </md-toolbar>
    }
-    <md-sidenav md-component-id="left" class="md-sidenav-left">
+    <md-sidenav md-component-id="left" class="md-sidenav-left" ng-cloak>
         <header class="nav-header">
             <a ng-href="/" class="docs-logo" href="/">
                 <img src="~/images/w_meraki-logo-negro.png" alt="Meraki Estudio">
@@ -60,7 +64,7 @@
         </header>
        <md-list flex>
            <md-list-item flex class="meraki-menu-item">
-               <a class="md-button md-no-style" href="~/">
+               <a class="md-button md-no-style"  href="~/">
                    <i class="fa fa-home"></i> Inicio
                </a>
            </md-list-item>
@@ -74,14 +78,14 @@
                    <i class="fa fa-pencil"></i> Plantillas
                </a>
            </md-list-item>
-           <md-list-item>
+           <md-list-item flex class="meraki-menu-item">
                <a class="md-button md-no-style" href="~/Config">
                    <i class="fa fa-cog"></i> Configuración
                </a>
            </md-list-item>
        </md-list>
     </md-sidenav>
-    <md-content class="body-content">
+    <md-content class="body-content" layout="row" layout-align-sm="center stretch">
         @RenderBody()
     </md-content>
     <footer>

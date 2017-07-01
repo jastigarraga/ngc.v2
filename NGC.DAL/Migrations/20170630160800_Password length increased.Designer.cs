@@ -9,9 +9,10 @@ using NGC.Model;
 namespace NGC.DAL.Migrations
 {
     [DbContext(typeof(MerakiContext))]
-    partial class MerakiContextModelSnapshot : ModelSnapshot
+    [Migration("20170630160800_Password length increased")]
+    partial class Passwordlengthincreased
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");

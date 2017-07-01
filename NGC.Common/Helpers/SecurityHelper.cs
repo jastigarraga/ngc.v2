@@ -9,28 +9,27 @@ namespace NGC.Common.Helpers
 {
     public static class SecurityHelper
     {
-        public static Password Hash(string password, string salt = null)
+        public static Password Hash(string password, byte[] salt = null)
         {
-            byte[] saltBytes;
             if(salt == null)
             {
                 using(var rnd = RandomNumberGenerator.Create())
                 {
-                    saltBytes = new byte[128 / 8];
-                    rnd.GetBytes(saltBytes);
+                    salt = new byte[128 / 8];
+                    rnd.GetBytes(salt);
                 }
             }
             else
             {
-                saltBytes = salt.Select(c => (byte)c).ToArray();
+                salt = salt.Select(c => (byte)c).ToArray();
             }
 
             return new Password()
             {
-                Salt = new string(saltBytes.Select(b=>(char)b).ToArray()),
+                Salt = salt,
                 Hash = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                     password: password,
-                    salt: saltBytes,
+                    salt: salt,
                     prf: KeyDerivationPrf.HMACSHA512,
                     iterationCount: 1000,
                     numBytesRequested: 132
@@ -50,13 +49,13 @@ namespace NGC.Common.Helpers
         {
             return Verify(password, user.Salt, user.Password);
         }
-        public static void UsetRawPassword(this User user,string password, string salt = null)
+        public static void UsetRawPassword(this User user,string password, byte[] salt = null)
         {
             var p = Hash(password, salt);
             user.Password = p.Hash;
             user.Salt = p.Salt;
         }
-        public static bool Verify(string raw,string salt,string hash)
+        public static bool Verify(string raw,byte[] salt,string hash)
         {
             Password password = Hash(raw, salt);
             return hash == password.Hash;

@@ -23,6 +23,11 @@ namespace NGC.UI.Controllers
             ViewBag.Model = model;
             return PartialView();
         }
+        [HttpGet("api/templates/{name}")]
+        public PartialViewResult Editor(string name)
+        {
+            return PartialView(name);
+        }
         public PartialViewResult ViewBase(string model)
         {
             ViewBag.Model = model;
@@ -54,7 +59,11 @@ namespace NGC.UI.Controllers
         {
             return View("EmailTemplateEditor");
         }
-       
+        public PartialViewResult MerakiPopupGrid()
+        {
+            return PartialView();
+        }
+
         [HttpGet("api/templates")]
         public IEnumerable<EmailTemplate> GetTemplates()
         {
@@ -78,6 +87,7 @@ namespace NGC.UI.Controllers
             _emailTemplateBLL.Save();
             return model;
         }
+        
         [HttpDelete("api/templates")]
         public ActionResult DeleteEmailTemplate(int id)
         {

@@ -19,7 +19,6 @@ namespace NGC.BLL
             bool isNameEmpty = string.IsNullOrWhiteSpace(filter.Name);
             bool isS1Empty = string.IsNullOrWhiteSpace(filter.Surname1);
             bool isS2Empty = string.IsNullOrWhiteSpace(filter.Surname2);
-
             var customers = repository.QueryAll.Where(c =>
                 (filter.Id == 0 || filter.Id == c.Id) &&
                 (isEmailEmpty || c.Email.Contains(filter.Email)) &&
@@ -31,7 +30,7 @@ namespace NGC.BLL
             return new DataSourceResult<Customer>()
             {
                 Total = customers.Count(),
-                Data = customers.Skip((page - 1) * pageSize).Take(pageSize)
+                Data = page != 0 && pageSize != 0?customers.Skip((page - 1) * pageSize).Take(pageSize):customers
             };
         }
         public IEnumerable<Customer> GetByDate(DateTime dateTime)

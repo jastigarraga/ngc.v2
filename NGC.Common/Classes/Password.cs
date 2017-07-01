@@ -6,7 +6,7 @@ namespace NGC.Common.Classes
 {
     public class Password
     {
-        public string Salt { get; set; }
+        public byte[] Salt { get; set; }
 
         public string Hash { get; set; }
     }

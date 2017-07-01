@@ -9,9 +9,10 @@ using NGC.Model;
 namespace NGC.DAL.Migrations
 {
     [DbContext(typeof(MerakiContext))]
-    partial class MerakiContextModelSnapshot : ModelSnapshot
+    [Migration("20170630155557_Add_Salt")]
+    partial class Add_Salt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
@@ -122,8 +123,8 @@ namespace NGC.DAL.Migrations
 
                     b.Property<string>("Password")
                         .HasColumnName("password")
-                        .HasColumnType("varchar(176)")
-                        .HasMaxLength(176);
+                        .HasColumnType("varchar(132)")
+                        .HasMaxLength(132);
 
                     b.Property<byte[]>("Salt")
                         .HasColumnType("varbinary(16)");

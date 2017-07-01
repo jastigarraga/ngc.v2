@@ -27,7 +27,7 @@ namespace NGC.UI.Controllers
                 }
             }
             ViewBag.Error = "Nombre de usuario y/o contraseña incorrectos";
-            return View("Index");
+            return View("Index",model);
         }
         [HttpGet]
         public ActionResult DoLogOff()

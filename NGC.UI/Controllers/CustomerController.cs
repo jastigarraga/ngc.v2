@@ -24,7 +24,7 @@ namespace NGC.UI.Controllers
         [HttpGet("api/customers")]
         public DataSourceResult<CustomerModel> GetAll(string filter, int page, int pageSize)
         {
-            var model = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomerModel>(filter);
+            var model = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomerModel>(filter ?? "{}");
             var customers = _customerBLL.GetByFilters(model.ToCustomer(),page,pageSize);
             return new DataSourceResult<CustomerModel>(){
                 Data = customers.Data.Select(c=>new CustomerModel(c)),

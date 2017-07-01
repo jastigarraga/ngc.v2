@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NGC.DAL.Base;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace NGC.UI
 {
@@ -31,7 +33,7 @@ namespace NGC.UI
         {
             // Add framework services.
 
-
+           // services.Configure<MvcOptions>(opts=>opts.Filters.Add(new RequireHttpsAttribute()));
             services.AddAuthorization(config =>
             {
                 config.AddPolicy("Loged", policy => policy.RequireAssertion(context =>
@@ -45,6 +47,7 @@ namespace NGC.UI
             });
             BLL.BLLConfiguration.Configure(services);
             services.Configure<MerakiConfiguration>(Configuration);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,6 +81,9 @@ namespace NGC.UI
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            /*var rwOptions = new RewriteOptions().AddRedirectToHttps();
+            app.UseRewriter(rwOptions);*/
         }
     }
 }
