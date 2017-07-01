@@ -68,29 +68,29 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
             cols: [
                 {
                     title: "Email",
-                    name: "email",
+                    name: "Email",
                     width: "120px",
                     templateUrl: Templates.ViewBase
                 }, {
                     title: "Fecha",
-                    name: "date",
+                    name: "Date",
                     templateUrl: Templates.ViewDate
                 }, {
                     title: "Envío",
-                    name: "lastSent",
+                    name: "LastSent",
                     templateUrl: Templates.ViewDate
                 },
                 {
                     title: "Nombre",
-                    name: "name",
+                    name: "Name",
                     templateUrl: Templates.ViewBase + "?model=Name"
                 }, {
                     title: "Primer apellido",
-                    name: "surname1",
+                    name: "Surname1",
                     templateUrl: Templates.ViewBase
                 }, {
                     title: "Segundo apellido",
-                    name: "surname2",
+                    name: "Surname2",
                     templateUrl: Templates.ViewBase
                 }
             ],
@@ -112,8 +112,10 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
                     method: "DELETE"
                 }
             },
+            pageSize:5,
             pageSizes:[5,10,20,50]
         }
+
     })
     .controller("merakiConfigController", ["$scope", "$http", "$mdDialog", function ($scope, $http, $mdDialog) {
         function askForEmail(cb) {
@@ -199,8 +201,10 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
             $http({
                 url: ApiRoutes.Templates
             }).then(function (response) {
+                debugger;
                 $scope.loading = false;
                 $scope.templates = response.data;
+                $scope.template = ($scope.templates && typeof $scope.templates.length !== "undefined" ? $scope.templates[0] : null);
             }, function (error) {
                 $scope.loading = false;
                 var alert = $mdDialog.alert({
@@ -214,7 +218,7 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
             });
         }
         $scope.new = function () {
-            $scope.template = { name: "Plantilla nueva" };
+            $scope.template = { Name: "Plantilla nueva" };
             $scope.templates.push($scope.template);
         }
         $scope.select = function (template) {

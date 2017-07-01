@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using NGC.Common.Classes;
 using NGC.UI.Models;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace NGC.UI.Controllers
 {
@@ -25,28 +26,28 @@ namespace NGC.UI.Controllers
         public DataSourceResult<CustomerModel> GetAll(string filter, int page, int pageSize)
         {
             var model = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomerModel>(filter ?? "{}");
-            var customers = _customerBLL.GetByFilters(model.ToCustomer(),page,pageSize);
+            var customers = _customerBLL.GetByFilters(Mapper.Map<Customer>(model),page,pageSize);
             return new DataSourceResult<CustomerModel>(){
-                Data = customers.Data.Select(c=>new CustomerModel(c)),
+                Data = customers.Data.Select(c=>Mapper.Map<CustomerModel>(c)),
                 Total = customers.Total
             };
         }
         [HttpPut("api/customers")]
         public CustomerModel CustomersPut([FromBody]CustomerModel model)
         {
-            Customer customer = model.ToCustomer();
+            Customer customer = Mapper.Map<Customer>(model);
             _customerBLL.Insert(customer);
             _customerBLL.Save();
-            return new CustomerModel(customer);
+            return Mapper.Map<CustomerModel>(customer);
         }
         [HttpPost("api/customers")]
         public CustomerModel CustomersPost([FromBody]CustomerModel model)
         {
             Customer customer = _customerBLL.GetById(model.Id);
-            customer = model.ToCustomer(customer);
+            customer = Mapper.Map<CustomerModel,Customer>(model,customer);
             _customerBLL.Update(customer);
             _customerBLL.Save();
-            return new CustomerModel(customer);
+            return Mapper.Map<CustomerModel>(customer);
         }
         [HttpDelete("api/customers")]
         public bool CustomerDelete([FromBody]CustomerModel model)

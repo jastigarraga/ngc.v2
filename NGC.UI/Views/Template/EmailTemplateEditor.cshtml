@@ -7,22 +7,22 @@
         <md-card-header>
             <h3>Plantillas</h3>
         </md-card-header>
-        <md-card-content layout="row">
+        <md-card-content layout="column">
             <md-list flex="20" class="scroll100y">
-                <md-list-item ng-repeat="t in templates track by $index" mg-colors="{background:'accent'}" ng-click="select(t)">{{t.name}}</md-list-item>
+                <md-list-item ng-repeat="t in templates track by $index" md-colors="{background:template==t?'accent':'default'}" ng-click="select(t)">{{t.Name}}</md-list-item>
             </md-list>
-            <form flex="80" layout="row">
+            <form flex="80" layout="column">
                 <md-input-container>
                     <label>
                         Nombre
                     </label>
-                    <input type="text" ng-model="template.name"/>
+                    <input type="text" ng-model="template.Name"/>
                 </md-input-container>
                 <md-input-container flex>
                     <label>
                         Asunto
                     </label>
-                    <input type="text" ng-model="template.subject" />
+                    <input type="text" ng-model="template.Subject" />
                 </md-input-container>
             </form>
         </md-card-content>
@@ -30,7 +30,7 @@
             <md-button ng-click="new()"><i class="fa fa-file"></i></md-button><md-button ng-click="save()"><i class="fa fa-save"></i></md-button><md-button ng-click="remove()"><i class="fa fa-trash"></i></md-button>
         </md-card-actions>
     </md-card>
-    <meraki-editor layout="column" flex ng-model="template.template"></meraki-editor>
+    <meraki-editor layout="column" flex ng-model="template.Template"></meraki-editor>
 </div>
 @section Scripts{
     <script src="~/app/meraki-editor/meraki-editor.js"></script>

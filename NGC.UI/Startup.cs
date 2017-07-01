@@ -11,6 +11,7 @@ using NGC.DAL.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
+using Newtonsoft.Json.Serialization;
 
 namespace NGC.UI
 {
@@ -41,13 +42,12 @@ namespace NGC.UI
             });
             services.AddMvc(setup => {
                 
-            });
+            }).AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             services.AddDbContext<MerakiContext>((options) =>
             {
             });
             BLL.BLLConfiguration.Configure(services);
             services.Configure<MerakiConfiguration>(Configuration);
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

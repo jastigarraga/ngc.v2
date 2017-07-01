@@ -81,10 +81,24 @@ html{
     justify-content: center;
     align-items: center;
 }
+
+.meraki-grid md-menu-content {
+    overflow: hidden !important;
+}
+
+.meraki-grid md-menu {
+    display: none;
+}
 @media (max-width:600px){
  
     .meraki-grid-cell::before {
         content: attr(data-title);
+    }
+    .meraki-grid md-menu{
+        display: inline-block;
+    }
+    .meraki-grid .fa.fa-filter{
+        color:white;
     }
     .meraki-grid tr, .meraki-grid tfoot div{
         display: flex;

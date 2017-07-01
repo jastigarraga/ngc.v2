@@ -1,13 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using NGC.BLL;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using NGC.BLL.Interfaces;
-using NGC.DAL.Base;
 using NGC.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using NGC.UI.Mapper;
 
 namespace NGC.UI.Controllers.Base
 {
@@ -15,8 +10,10 @@ namespace NGC.UI.Controllers.Base
     {
         private User merakiUser;
         protected IUserBLL _userBLL;
+        protected IMapper Mapper { get; private set; }
         public MerakiController(IUserBLL userBll)
         {
+            Mapper = MapperFactory.GetMapper();
             _userBLL = userBll;
         }
         protected User MerakiUser {
