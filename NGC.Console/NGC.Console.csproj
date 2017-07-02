@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="appsettings.Development.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NGC.BLL\NGC.BLL.csproj" />
     <ProjectReference Include="..\NGC.Common\NGC.Common.csproj" />
     <ProjectReference Include="..\NGC.Model\NGC.Model.csproj" />

@@ -24,7 +24,7 @@ namespace NGC.Console
                 .ConfigureBLL()
                 .BuildServiceProvider();
 
-            if (string.IsNullOrWhiteSpace(args[0]))
+            if (args.Length == 0 || string.IsNullOrWhiteSpace(args[0]))
             {
                 PrintInstructions();
                 return;
