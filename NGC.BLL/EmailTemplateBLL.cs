@@ -1,6 +1,7 @@
 ﻿using NGC.Model;
 using System.Linq;
 using NGC.DAL.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace NGC.BLL
 {
@@ -12,7 +13,7 @@ namespace NGC.BLL
 
         public EmailTemplate GetById(int id)
         {
-            return repository.QueryAll.Where(e => e.Id == id).FirstOrDefault();
+            return repository.QueryAll.Where(e => e.Id == id).Include(e=>e.Customers).FirstOrDefault();
         }
     }
 }

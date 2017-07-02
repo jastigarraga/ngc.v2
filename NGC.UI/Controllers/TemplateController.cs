@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using NGC.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NGC.Model;
+using NGC.UI.Models;
 
 namespace NGC.UI.Controllers
 {
@@ -65,27 +66,25 @@ namespace NGC.UI.Controllers
         }
 
         [HttpGet("api/templates")]
-        public IEnumerable<EmailTemplate> GetTemplates()
+        public IEnumerable<EmailTemplateModel> GetTemplates()
         {
-            return _emailTemplateBLL.GetAll();
+            return _emailTemplateBLL.GetAll().Select(m=>Mapper.Map<EmailTemplateModel>(m));
         }
         [HttpPost("api/templates")]
-        public EmailTemplate UpdateEmailTemplate([FromBody] EmailTemplate model)
+        public EmailTemplateModel UpdateEmailTemplate([FromBody] EmailTemplateModel model)
         {
             EmailTemplate template = _emailTemplateBLL.GetById(model.Id);
-            template.Name = model.Name;
-            template.Subject = model.Subject;
-            template.Template = model.Template;
-            _emailTemplateBLL.Update(template);
+            Mapper.Map<EmailTemplateModel, EmailTemplate>(model, template);
             _emailTemplateBLL.Save();
-            return template;
+            return Mapper.Map<EmailTemplateModel>(template);
         }
         [HttpPut("api/templates")]
-        public EmailTemplate InsertEmailTemplate([FromBody]EmailTemplate model)
+        public EmailTemplateModel InsertEmailTemplate([FromBody]EmailTemplateModel model)
         {
-            _emailTemplateBLL.Insert(model);
+            var m = Mapper.Map<EmailTemplate>(model);
+            _emailTemplateBLL.Insert(m);
             _emailTemplateBLL.Save();
-            return model;
+            return Mapper.Map<EmailTemplateModel>(m);
         }
         
         [HttpDelete("api/templates")]
@@ -94,6 +93,10 @@ namespace NGC.UI.Controllers
             try
             {
                 EmailTemplate template = _emailTemplateBLL.GetById(id);
+                if (template.Customers.Any())
+                {
+                    return BadRequest("No se puede eliminar una plantilla que tenga usuarios");
+                }
                 _emailTemplateBLL.Delete(template);
                 _emailTemplateBLL.Save();
                 return Ok();

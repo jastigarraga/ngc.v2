@@ -1,0 +1,8 @@
+D:\Proyectos\NGC\NGC.DAL\bin\Release\netcoreapp1.1\NGC.DAL.deps.json
+D:\Proyectos\NGC\NGC.DAL\bin\Release\netcoreapp1.1\NGC.DAL.dll
+D:\Proyectos\NGC\NGC.DAL\bin\Release\netcoreapp1.1\NGC.DAL.pdb
+D:\Proyectos\NGC\NGC.DAL\bin\Release\netcoreapp1.1\NGC.Model.dll
+D:\Proyectos\NGC\NGC.DAL\bin\Release\netcoreapp1.1\NGC.Model.pdb
+D:\Proyectos\NGC\NGC.DAL\obj\Release\netcoreapp1.1\NGC.DAL.AssemblyInfo.cs
+D:\Proyectos\NGC\NGC.DAL\obj\Release\netcoreapp1.1\NGC.DAL.dll
+D:\Proyectos\NGC\NGC.DAL\obj\Release\netcoreapp1.1\NGC.DAL.pdb

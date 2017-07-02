@@ -1,0 +1,82 @@
+﻿<md-dialog ng-cloak>
+    <md-dialog-header class="md-padding">
+        <h2>{{title}}</h2>
+    </md-dialog-header>
+    <md-dialog-content>
+        <form name="modelForm" class="md-padding">
+            <md-input-container>
+                <label>Email</label>
+                <input type="email" name="Email" ng-model="model.Email" required md-maxlength="40" md-minlength="0" />
+                <div ng-messages="loginForm.Email.$error" ng-show="loginForm.Email.$invalid">
+                    <div ng-message="email" ng-if="modelForm.Email.$error.email">Ha de ser un email válido</div>
+                    <div ng-message="required" ng-if="modelForm.Email.$error.required">El campo es obligatorio</div>
+                    <div ng-message="md-maxlength" ng-if="modelForm.name.$error['md-maxlength']">El campo es demasiado largo</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>Nombre</label>
+                <input type="text" name="name" ng-model="model.Name" required md-maxlength="40" md-minlength="0"/>
+                <div ng-messages="loginForm.name.$error" ng-show="loginForm.name.$invalid">
+                    <div ng-message="required" ng-if="modelForm.name.$error.required">El campo es obligatorio</div>
+                    <div ng-message="md-maxlength" ng-if="modelForm.name.$error['md-maxlength']">El campo es demasiado largo</div>
+                </div>
+            </md-input-container>
+
+            <div layout-md="row">
+                <md-input-container>
+                    <label>Primer Apellido</label>
+                    <input type="text" name="surname1" ng-model="model.Surname1" required md-maxlength="100" md-minlength="0" />
+                    <div ng-messages="loginForm.surname1.$error" ng-show="loginForm.surname1.$invalid">
+                        <div ng-message="md-maxlength" ng-if="modelForm.surname1.$error['md-maxlength']">El campo es demasiado largo</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label>Segundo Apellido</label>
+                    <input type="text" name="surname2" ng-model="model.Surname2"  md-maxlength="100" md-minlength="0" />
+                    <div ng-messages="loginForm.Login.$error" ng-show="loginForm.Login.$invalid">
+                        <div ng-message="md-maxlength" ng-if="modelForm.name.$error['md-maxlength']">El campo es demasiado largo</div>
+                    </div>
+                </md-input-container>
+           </div>
+                <md-inptut-container>
+                    <md-select ng-model="model.IdTemplate" placeholder="Plantilla" ng-init="getCollection('templates',@(Html.Raw($"'{Url.Action("Templates","api")}'")))">
+                        <md-option ng-repeat="template in templates" ng-value="template.Id">{{template.Name}}</md-option>
+                    </md-select>
+                </md-inptut-container>
+                <div layout="row" layout-align="space-around start">
+                    <md-input-container>
+                        <label>Fecha de cumpleaños</label>
+                        <md-datepicker name="date" ng-model="model.Date"></md-datepicker>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Último envío</label>
+                        <md-datepicker name="lastSent" ng-model="model.LastSent"></md-datepicker>
+                    </md-input-container>
+                </div>
+            <div layout="row" layout-align="space-around start" flex>
+                <md-input-container>
+                    <md-select ng-model="model.Gender" placeholder="Género">
+                        <md-option ng-value="true">Hombre</md-option>
+                        <md-option ng-value="false">Mujer</md-option>
+                        <md-option ng-value="null">Otro/Desconocido</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container>
+                    <md-select placeholder="Estado civil" ng-model="model.MaritalState">
+                        <md-option ng-value="0">Desconocido</md-option>
+                        <md-option ng-value="1">Soltero</md-option>
+                        <md-option ng-value="2">En pareja</md-option>
+                        <md-option ng-value="3">Casado</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container>
+                    <label>Número de hijos</label>
+                    <input name="childrenCount" type="number" ng-model="model.ChildrenCount" />
+                </md-input-container>
+            </div>
+</form>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-raised" ng-click="save()">Guadar</md-button><md-button class="md-raised" ng-click="cancel()">Cancelar</md-button>
+    </md-dialog-actions>
+</md-dialog>

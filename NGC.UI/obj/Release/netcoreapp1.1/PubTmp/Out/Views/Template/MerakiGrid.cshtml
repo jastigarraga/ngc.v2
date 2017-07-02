@@ -1,0 +1,80 @@
+﻿<table class="meraki-table" flex>
+    <colgroup>
+        <col ng-repeat="col in table.columns" ng-class="col.class" />
+        <col style="width: 216px;" />
+    </colgroup>
+    <thead md-colors="{background:'primary'}">
+        <tr>
+            <th layout="row" layout-align="star end">
+                <md-button class="md-raised" ng-click="showInsertRow()"><i class="fa fa-plus"></i></md-button>
+            </th>
+            <th colspan="99"></th>
+        </tr>
+        <tr>
+            <th ng-repeat="col in table.columns">{{(col.header || col.name)}}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-show="inserting">
+            <td ng-repeat="col in table.columns" ng-include="col.editTemplateUrl"></td>
+            <td>
+                <md-button class="md-raised" ng-click="insert()"><span class="fa fa-check"></span></md-button>
+                <md-button class="md-raised" ng-click="cancel()"><span class="fa fa-remove"></span></md-button>
+            </td>
+        </tr>
+        <tr ng-repeat="row in table.rows track by $index" md-colors="{background:($index%2!==0?'primary-100':'primary-50')}">
+            <td ng-repeat="col in table.columns" ng-include="editIndex==$parent.$index?col.editTemplateUrl:col.templateUrl"></td>
+            <td>
+                <md-button class="md-raised" ng-click="setEditIndex($index)" ng-if="$index!=editIndex"><span class="fa fa-pencil"></span></md-button>
+                <md-button class="md-raised" ng-click="delete($index)" ng-if="$index!=editIndex"><span class="fa fa-trash"></span></md-button>
+                <md-button class="md-raised" ng-click="update($index)" ng-if="$index==editIndex"><span class="fa fa-check"></span></md-button>
+                <md-button class="md-raised" ng-click="cancel()" ng-if="$index==editIndex"><span class="fa fa-remove"></span></md-button>
+            </td>
+        </tr>
+        <tr ng-if="!table.rows.length">
+            <td colspan="{{table.columns.length}}">No hay registros</td>
+        </tr>
+    </tbody>
+    <tfoot ng-if="table.total" md-colors="{background:'primary'}">
+        <tr>
+            <td colspan="{{table.columns.length + 1}}">
+                <div>
+                    <span>
+                        <md-input-container class="not-flex">
+                            <md-select-header>
+                                <span>Resultados por página</span>
+                            </md-select-header>
+                            <md-select ng-model="table.pageSize" ng-change="read()">
+                                <md-option ng-value="size.value" ng-repeat="size in table.pageSizes">{{ size.text || size.value }}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </span>
+                    <span>
+                        <md-button ng-if="!table.page || table.page!=1" ng-click="setPage(1)"><span class="fa fa-fast-backward"></span></md-button>
+                        <md-button class="btn page" ng-class="page == table.page?'':'btn-default'" ng-repeat="page in pages" ng-click="setPage(page)">{{page}}</md-button>
+                        <md-button ng-if="!table.page || table.page!=pageCount" class="btn btn-default" ng-click="setPage(-1)"><span class="fa fa-fast-forward"></span></md-button>
+                    </span>
+                    <span>
+                        {{table.from}} a {{table.to}} de {{table.total}} <md-button ng-click="read()"><i class="fa fa-refresh"></i></md-button>
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="confirmDeleteDialog">
+<md-dialog>
+    <md-dialog-content class="md-dialog-content">
+        <h2 class="md-title">Confirmar Eliminar</h2>
+        <p>¿Seguro que deséa eliminar el registro?</p>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button>Si</md-button>
+        <md-button>No</md-button>
+    </md-dialog-actions>
+</md-dialog>
+    </div>
+    </div>
+<div class="ngc-spinner" ng-if="loading"><md-progress-circular md-diameter="200" md-mode="indeterminate"></md-progress-circular></div>

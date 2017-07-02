@@ -1,0 +1,83 @@
+﻿<table class="meraki-grid">
+    <colgroup>
+        <col style="width:88px" />
+        <col ng-repeat="col in mpg.cols" ng-style="{width:col.width}"/>
+    </colgroup>
+    <thead >
+        <tr>
+            <th layout="row"><md-button class="md-raised md-fab md-mini" ng-click="showInsertDialog()"><i class="fa fa-plus"></i></md-button></th>
+        </tr>
+        <tr md-colors="{'background-color':'primary'}">
+            <th ng-repeat="col in mpg.cols">
+                <span class="meraki-grid-header">
+                <span><i class="fa fa" ng-class="'fa-fa-caret'+orderDirection" ng-show="orderIndex == $index"></i>&nbsp;</span> 
+                    {{col.title || col.name}} 
+                    <md-menu md-position-mode="target-right bottom">
+                        <a ng-click="$mdMenu.open($event)"><i class="fa fa-filter"></i></a>
+                        <md-menu-content style="overflow:hidden">
+                            <md-input-container>
+                                <label>Valor</label>
+                                <input type="text" ng-model="filter[col.name]" />
+                            </md-input-container>
+                            <md-button>
+                                Filtrar
+                            </md-button>
+                        </md-menu-content>
+                    </md-menu>
+                </span>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in rows">
+            <td  ng-repeat="col in mpg.cols" >
+
+                <md-menu md-position-mode="target-right bottom">
+                    <a ng-click="$mdMenu.open($event)"><i class="fa fa-filter"></i></a>
+                    <md-menu-content style="overflow:hidden">
+                        <md-input-container>
+                            <label>Valor</label>
+                            <input type="text" ng-model="filter[col.name]" />
+                        </md-input-container>
+                        <md-button>
+                            Filtrar
+                        </md-button>
+                    </md-menu-content>
+                </md-menu>
+                <div class="meraki-grid-cell" data-title="{{col.title || col.name}}">
+                    <div class="meraki-grid-cell-content" ng-include="col.templateUrl"></div>
+                </div>
+            </td>
+            <td>
+                <md-button class="md-default md-raised md-fab md-mini" ng-click="showEditDialog(row,$index)"><i class="fa fa-pencil"></i></md-button>
+                <md-button class="md-default md-raised md-fab md-mini" ng-click="delete($index)"><i class="fa fa-trash"></i></md-button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot md-colors="{'background-color':'primary'}">
+        <tr>
+            <td colspan="999">
+                <div layout="row" layout-align="space-between center">
+                    <span layout="row" layout-align="start center">
+                        <label>Tamaño de página</label>
+                        <md-input-container>
+                            <md-select ng-model="mpg.pageSize" ng-change="read()">
+                                <md-option value="0">Todos</md-option>
+                                <md-option ng-repeat="p in mpg.pageSizes" value="{{p}}">{{p}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </span>
+                    <span ng-show="mpg.pageSize!=0">
+                        <md-button class="md-default md-raised md-fab md-mini" ng-disabled="page==1" ng-click="setPage(1)"><i class="fa fa-fast-backward"></i></md-button>
+                        <md-button class="md-default md-raised md-fab md-mini" ng-disabled="page==1" ng-click="setPage(page-1)"><i class="fa fa-caret-left"></i></md-button>
+                        <md-button class="md-default md-fab md-mini meraki-page-button" ng-class="page == p.number?'':'md-raised'" ng-disabled="p.disabled" ng-repeat="p in pageButtons" ng-click="setPage(p.number)">{{p.number}}</md-button>
+                        <md-button class="md-default md-fab md-mini md-raised"  ng-disabled="page==pageCount" ng-click="setPage(page+1)"><i class="fa fa-caret-right"></i></md-button>
+                        <md-button class="md-default md-raised md-fab md-mini"  ng-disabled="page==pageCount" ng-click="setPage(pageCount)"><i class="fa fa-fast-forward"></i></md-button>
+                    </span>
+                    <span>De {{from}} a {{to}} de {{total}} <md-button class="md-default md-fab md-mini md-raised" ng-click="read()"><i class="fa fa-refresh"></i></md-button></span>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
