@@ -875,6 +875,68 @@
           }
         }
       },
+      "runtime.linux-x64.CoreCompat.System.Drawing/1.0.0-beta009": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libcairo.so.2": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libexif.so.12": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libfontconfig.so.1": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libfreetype.so.6": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libgdiplus.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libgif.so.7": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libglib-2.0.so.0": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libjbig.so.0": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libjpeg.so.8": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libpixman-1.so.0": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libpng12.so.0": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libtiff.so.5": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          }
+        }
+      },
       "runtime.native.System/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1140,7 +1202,7 @@
           "System.Threading": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Collections.Specialized.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Collections.Specialized.dll": {}
@@ -2984,6 +3046,23 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "ZKWeb.System.Drawing/3.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections.NonGeneric": "4.0.1",
+          "System.Collections.Specialized": "4.0.1",
+          "System.ComponentModel.TypeConverter": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Runtime.Serialization.Primitives": "4.1.1",
+          "System.Threading.Thread": "4.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.5/ZKWeb.System.Drawing.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/ZKWeb.System.Drawing.dll": {}
+        }
+      },
       "NGC.Common/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.1",
@@ -2991,7 +3070,9 @@
           "MailKit": "1.16.1",
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "1.1.2",
           "Microsoft.NETCore.App": "1.1.2",
-          "NGC.Model": "1.0.0"
+          "NGC.Model": "1.0.0",
+          "ZKWeb.System.Drawing": "3.0.0",
+          "runtime.linux-x64.CoreCompat.System.Drawing": "1.0.0-beta009"
         }
       },
       "NGC.DAL/1.0.0": {
@@ -3860,6 +3941,28 @@
         "runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.1.nupkg.sha512",
         "runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/fedora.24-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "runtime.linux-x64.CoreCompat.System.Drawing/1.0.0-beta009": {
+      "sha512": "6t5B23rZDy6xXWKWZ34Tj2mVeq+CCW4nFZmBCcC1U4lbdhWu2KCQi6Mr1fPJ0F8LErfT7ict8yL0MXL/xBvswQ==",
+      "type": "package",
+      "path": "runtime.linux-x64.corecompat.system.drawing/1.0.0-beta009",
+      "files": [
+        "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll",
+        "runtime.linux-x64.corecompat.system.drawing.1.0.0-beta009.nupkg.sha512",
+        "runtime.linux-x64.corecompat.system.drawing.nuspec",
+        "runtimes/linux-x64/native/libcairo.so.2",
+        "runtimes/linux-x64/native/libexif.so.12",
+        "runtimes/linux-x64/native/libfontconfig.so.1",
+        "runtimes/linux-x64/native/libfreetype.so.6",
+        "runtimes/linux-x64/native/libgdiplus.so",
+        "runtimes/linux-x64/native/libgif.so.7",
+        "runtimes/linux-x64/native/libglib-2.0.so.0",
+        "runtimes/linux-x64/native/libjbig.so.0",
+        "runtimes/linux-x64/native/libjpeg.so.8",
+        "runtimes/linux-x64/native/libpixman-1.so.0",
+        "runtimes/linux-x64/native/libpng12.so.0",
+        "runtimes/linux-x64/native/libtiff.so.5"
       ]
     },
     "runtime.native.System/4.3.0": {
@@ -8685,6 +8788,17 @@
         "ref/xamarinwatchos10/_._",
         "system.xml.xpath.xdocument.4.0.1.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
+      ]
+    },
+    "ZKWeb.System.Drawing/3.0.0": {
+      "sha512": "sTzQ+jZr9KZmi9yH3LvK6E+GD8CHy839aRiM71oHo3bM4Xg95ksVU9pHMKxXmZu7g1NQEoM7ixarGdYauj5o5w==",
+      "type": "package",
+      "path": "zkweb.system.drawing/3.0.0",
+      "files": [
+        "lib/net45/ZKWeb.System.Drawing.dll",
+        "lib/netstandard1.5/ZKWeb.System.Drawing.dll",
+        "zkweb.system.drawing.3.0.0.nupkg.sha512",
+        "zkweb.system.drawing.nuspec"
       ]
     },
     "NGC.Common/1.0.0": {

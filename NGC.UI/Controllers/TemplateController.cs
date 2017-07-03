@@ -6,9 +6,11 @@ using NGC.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NGC.Model;
 using NGC.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NGC.UI.Controllers
 {
+    [Authorize]
     public class TemplateController : Base.MerakiController
     {
         protected IEmailTemplateBLL _emailTemplateBLL;

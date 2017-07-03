@@ -8,6 +8,23 @@ namespace NGC.DAL.Base
 {
     public static class MerakiEntityMappings
     {
+        public static void MapMerakiImage(ModelBuilder builder)
+        {
+            builder.Entity<MerakiTextImage>(b => {
+                b.ForMySqlToTable("meraki_text_image");
+
+                b.HasKey(i => i.Id);
+                b.Property(i => i.Name).HasColumnType("varchar(100)");
+                b.Property(i => i.Height);
+                b.Property(i => i.FontName);
+                b.Property(i=>i.Text).HasColumnType("varchar(100)");
+                b.Property(i => i.Width);
+                b.Property(i => i.X);
+                b.Property(i => i.Y);
+
+
+            });
+        }
         public static void MapUser(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>((build)=> {

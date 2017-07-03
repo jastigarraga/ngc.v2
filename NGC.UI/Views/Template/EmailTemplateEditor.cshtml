@@ -2,9 +2,7 @@
     Layout = "_Layout";
     ViewBag.Title = "Editor de Plantillas";
 }
-<div ng-controller="MerakiTemplateEditorController" flex layout="row" ng-init="selected = 0" 
-     md-swipe-right="selected=selected>0?selected-1:selected"
-     md-swipe-left="selected=selected<3?selected+1:selected">
+<div ng-controller="MerakiTemplateEditorController" flex layout="row" ng-init="selected = 0">
     <md-tabs flex="100" ng-cloak md-selected="selected">
         <md-tab label="datos">
             <div class="md-padding" layout="column">

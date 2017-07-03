@@ -1,13 +1,22 @@
 ﻿using AutoMapper;
 using NGC.Model;
 using NGC.UI.Models;
+using System;
 using System.Linq;
 namespace NGC.UI.Mapper
 {
     public static class MapperFactory
     {
         private static IMapper instance;
+        private static IMapperConfigurationExpression MapMerakiTextImage(this IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<MerakiTextImage, MerakiTextImageModel>()
+                .ForMember(i=>i.Src,opts=>opts.MapFrom(entity=>$"data:image/png;base64,{Convert.ToBase64String(entity.Bytes)}"));
+            cfg.CreateMap<MerakiTextImageModel, MerakiTextImage>()
+                .ForMember(entity=>entity.Bytes,opts=>opts.MapFrom(model=>Convert.FromBase64String(model.Src.Replace("data:image/png;base64,",""))));
 
+            return cfg;
+        }
         private static IMapperConfigurationExpression MapUser(this IMapperConfigurationExpression cfg)
         {
             cfg.CreateMap<User, UserModel>();
@@ -42,7 +51,8 @@ namespace NGC.UI.Mapper
             {
                 cfg.MapUser()
                     .MapCustomer()
-                    .MapEmailTemplate();
+                    .MapEmailTemplate()
+                    .MapMerakiTextImage();
             });
             configuration.AssertConfigurationIsValid();
             instance = configuration.CreateMapper();

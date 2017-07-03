@@ -109,6 +109,36 @@ namespace NGC.DAL.Migrations
                     b.HasAnnotation("MySql:TableName", "emailtemplate");
                 });
 
+            modelBuilder.Entity("NGC.Model.MerakiTextImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("Bytes");
+
+                    b.Property<string>("FontName");
+
+                    b.Property<double>("Height");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<double>("Width");
+
+                    b.Property<double>("X");
+
+                    b.Property<double>("Y");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MerakiTextImage");
+
+                    b.HasAnnotation("MySql:TableName", "meraki_text_image");
+                });
+
             modelBuilder.Entity("NGC.Model.User", b =>
                 {
                     b.Property<int>("Id")

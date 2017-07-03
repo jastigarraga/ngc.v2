@@ -11,6 +11,10 @@ namespace NGC.DAL.Base
         {
             this.ConnectionString = settings.Value.ConnectionString;
         }
+        public MerakiContext(string connectionString)
+        {
+            this.ConnectionString = connectionString;
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql(ConnectionString,(builder)=> 
@@ -18,12 +22,14 @@ namespace NGC.DAL.Base
                 
             );
         }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             MerakiEntityMappings.MapUser(modelBuilder);
             MerakiEntityMappings.MapCustomer(modelBuilder);
             MerakiEntityMappings.MapConfiguration(modelBuilder);
             MerakiEntityMappings.MapEmailTemplate(modelBuilder);
+            MerakiEntityMappings.MapMerakiImage(modelBuilder);
         }
     }
 }

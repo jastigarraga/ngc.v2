@@ -11,6 +11,8 @@
   <ItemGroup>
     <PackageReference Include="MailKit" Version="1.16.1" />
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="1.1.2" />
+    <PackageReference Include="runtime.linux-x64.CoreCompat.System.Drawing" Version="1.0.0-beta009" />
+    <PackageReference Include="ZKWeb.System.Drawing" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,23 +8,12 @@
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="wwwroot\js\cultures\**" />
-    <Compile Remove="wwwroot\js\messages\**" />
-    <Content Remove="wwwroot\js\cultures\**" />
-    <Content Remove="wwwroot\js\messages\**" />
-    <EmbeddedResource Remove="wwwroot\js\cultures\**" />
-    <EmbeddedResource Remove="wwwroot\js\messages\**" />
-    <None Remove="wwwroot\js\cultures\**" />
-    <None Remove="wwwroot\js\messages\**" />
-  </ItemGroup>
+
 
   <ItemGroup>
     <Content Update="wwwroot\app\meraki-editor\meraki-editor.js" />
     <Content Update="wwwroot\app\meraki-grid\meraki-popup-grid.js" />
     <Content Update="wwwroot\app\meraki-grid\meraki-grid.js" />
-    <Content Update="wwwroot\js\Meraki.App.js" />
-    <Content Update="wwwroot\js\UI\Meraki.UI.js" />
     <Content Update="wwwroot\node_modules\angular-aria\angular-aria.js" />
     <Content Update="wwwroot\node_modules\angular-aria\angular-aria.min.js" />
     <Content Update="wwwroot\node_modules\angular-aria\angular-aria.min.js.map" />

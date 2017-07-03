@@ -12,5 +12,6 @@ namespace NGC.BLL.Interfaces
         DataSourceResult<Customer> GetByFilters(Customer filter, int page, int pageSize);
 
         IEnumerable<Customer> GetByDate(DateTime dateTime);
+        IEnumerable<Customer> GetBYDayOfYear(int dayOfYear);
     }
 }

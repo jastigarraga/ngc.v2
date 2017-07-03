@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "e1fa27c7d83df6537da2c3327eaf9f88e4565196"
+    "signature": "8b750e0e5ea905cb3c370bab463c7876253c57fe"
   },
   "compilationOptions": {},
   "targets": {
@@ -18,6 +18,15 @@
         },
         "runtime": {
           "NGC.Test.dll": {}
+        }
+      },
+      "automapper/6.1.1": {
+        "dependencies": {
+          "System.Collections.Specialized": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/AutoMapper.dll": {}
         }
       },
       "mailkit/1.16.1": {
@@ -1126,6 +1135,61 @@
           "lib/netstandard1.0/Remotion.Linq.dll": {}
         }
       },
+      "runtime.linux-x64.corecompat.system.drawing/1.0.0-beta009": {
+        "runtime": {
+          "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libcairo.so.2": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libexif.so.12": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libfontconfig.so.1": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libfreetype.so.6": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libgdiplus.so": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libgif.so.7": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libglib-2.0.so.0": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libjbig.so.0": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libjpeg.so.8": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libpixman-1.so.0": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libpng12.so.0": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          },
+          "runtimes/linux-x64/native/libtiff.so.5": {
+            "rid": "linux-x64",
+            "assetType": "native"
+          }
+        }
+      },
       "system.collections.nongeneric/4.3.0": {
         "runtime": {
           "lib/netstandard1.3/System.Collections.NonGeneric.dll": {}
@@ -1303,6 +1367,17 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
+      "zkweb.system.drawing/3.0.0": {
+        "dependencies": {
+          "System.Collections.NonGeneric": "4.3.0",
+          "System.Collections.Specialized": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.3.0",
+          "System.Runtime.Serialization.Primitives": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.5/ZKWeb.System.Drawing.dll": {}
+        }
+      },
       "ngc.bll/1.0.0": {
         "dependencies": {
           "NGC.Common": "1.0.0",
@@ -1317,7 +1392,9 @@
         "dependencies": {
           "MailKit": "1.16.1",
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "1.1.2",
-          "NGC.Model": "1.0.0"
+          "NGC.Model": "1.0.0",
+          "ZKWeb.System.Drawing": "3.0.0",
+          "runtime.linux-x64.CoreCompat.System.Drawing": "1.0.0-beta009"
         },
         "runtime": {
           "NGC.Common.dll": {}
@@ -1342,6 +1419,7 @@
       },
       "ngc.ui/1.0.0": {
         "dependencies": {
+          "AutoMapper": "6.1.1",
           "Microsoft.ApplicationInsights.AspNetCore": "2.0.1",
           "Microsoft.AspNetCore": "1.1.2",
           "Microsoft.AspNetCore.Authentication.Cookies": "1.1.2",
@@ -1368,6 +1446,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "automapper/6.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A+6PAblvzmkXPS20nFBQJvlNSW5oEdyfN5+cxT/Du35fTNyuP5pNDXT64KT/jBgxt7CPduOM0Y7oLnNe0E5IXg==",
+      "path": "automapper/6.1.1",
+      "hashPath": "automapper.6.1.1.nupkg.sha512"
     },
     "mailkit/1.16.1": {
       "type": "package",
@@ -2048,6 +2133,13 @@
       "path": "remotion.linq/2.1.1",
       "hashPath": "remotion.linq.2.1.1.nupkg.sha512"
     },
+    "runtime.linux-x64.corecompat.system.drawing/1.0.0-beta009": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6t5B23rZDy6xXWKWZ34Tj2mVeq+CCW4nFZmBCcC1U4lbdhWu2KCQi6Mr1fPJ0F8LErfT7ict8yL0MXL/xBvswQ==",
+      "path": "runtime.linux-x64.corecompat.system.drawing/1.0.0-beta009",
+      "hashPath": "runtime.linux-x64.corecompat.system.drawing.1.0.0-beta009.nupkg.sha512"
+    },
     "system.collections.nongeneric/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -2215,6 +2307,13 @@
       "sha512": "sha512-Zm2BdeanuncYs3NhCj4c9e1x3EXFzFBVv2wPEc/Dj4ZbI9R8ecLSR5frAsx4zJCPBtKQreQ7Q/KxJEohJZbfzA==",
       "path": "system.xml.xpath.xmldocument/4.0.1",
       "hashPath": "system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
+    },
+    "zkweb.system.drawing/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sTzQ+jZr9KZmi9yH3LvK6E+GD8CHy839aRiM71oHo3bM4Xg95ksVU9pHMKxXmZu7g1NQEoM7ixarGdYauj5o5w==",
+      "path": "zkweb.system.drawing/3.0.0",
+      "hashPath": "zkweb.system.drawing.3.0.0.nupkg.sha512"
     },
     "ngc.bll/1.0.0": {
       "type": "project",

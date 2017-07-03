@@ -1,0 +1,103 @@
+﻿@using NGC.Model
+@using NGC.Common.Extensions
+
+<div layout="column" flex ng-controller="MerakiImageController" ng-cloak>
+    <md-tabs flex md-selected="selectedTab">
+        <md-tab label="lista" style="overflow:auto">
+            <md-list flex>
+                <md-list-item ng-repeat="img in images">
+                    <md-button ng-click="select(img)">{{img.Name}}</md-button>
+                </md-list-item>
+            </md-list>
+        </md-tab>
+        <md-tab label="datos" layout="column" flex>
+            <div flex layout="row" layout-align="center center">
+                    <img ng-src="{{image.Src}}" ng-style="{'width':width,height:height}" style="max-width:100%;max-height:100%;height:auto;width:auto"/>
+            </div>
+            <form flex name="imgForm" layout="column">
+                <md-button class="md-raised" ng-click="openFileDialog()"><i class="fa fa-image"></i> Seleccionar Imagen</md-button>
+                <div layout="row">
+                    <md-input-container>
+                        <label>X</label>
+                        <input type="number" name="X" ng-model="image.X" />
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Y</label>
+                        <input type="number" name="Y" ng-model="image.Y" />
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Ancho</label>
+                        <input type="number" name="Width" ng-model="image.Width" />
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Alto</label>
+                        <input type="number" name="Height" ng-model="image.Height" />
+                    </md-input-container>
+                </div>
+                <md-input-container>
+                    <label>Texto</label>
+                    <input type="text" name="text" ng-model="image.Text" />
+                </md-input-container>
+                <md-input-container>
+                    <label>Nombre</label>
+                    <input type="text" name="Name" ng-model="image.Name" />
+                </md-input-container>
+            </form>
+        </md-tab>
+    </md-tabs>
+    <div layout="row">
+        <md-button class="marginless" ng-click="back()" ng-if="selectedTab==1"><i class="fa fa-arrow-left"></i></md-button>
+        <md-button class="marginless" ng-if="selectedTab==0" ng-click="new()"><i class="fa fa-file"></i></md-button>
+        <md-button class="marginless"><i class="fa fa-save"></i></md-button>
+        <md-button class="marginless"><i class="fa fa-trash"></i></md-button>
+    </div>
+    <input type="file" accept="image/*" style="display:none" id="imageFile"/>
+    <div class="meraki-spinner" ng-hide="ready">
+        <md-progress-circular md-mode="indeterminate" md-diameter="200"></md-progress-circular>
+    </div>
+
+</div>
+<script>
+    angular.module("MerakiApp").controller("MerakiImageController", ["$mdDialog", "$mdToast", "$http", "$scope", function ($mdDialog, $mdToast, $http, $scope) { 
+        function loadImages() {
+            $scope.ready = false;
+            $http({
+                url: ApiRoutes.ApiMerakiImages
+            }).then(function (response) {
+                $scope.ready = true;
+                $scope.images = response.data;
+            }, function (error) { 
+                $mdDialog.show($mdDialog.alert().title("Error").textContent(error.message).ok("Aceptar"));    
+            });
+        }
+        var fileInput = angular.element("#imageFile")[0];
+        fileInput.onchange = function () {
+            if (fileInput.files.length) {
+                $scope.ready = false;
+                var fileReader = new FileReader();
+                fileReader.onload = function () {
+                    $scope.image.Src = this.result;
+                    $scope.ready = true;
+                };
+                fileReader.readAsDataURL(fileInput.files[0]);
+            }
+        };
+        $scope.openFileDialog = function () {
+            $(fileInput).trigger("click");
+        };
+        $scope.back = function () {
+            $scope.selectedTab = 0;
+        };
+        $scope.select = function (img) {
+            $scope.image = img;
+            $scope.selectedTab = 1;
+        }
+        $scope.new = function () {
+            var n = { Name:"Nueva Imagen"};
+            $scope.images.push(n);
+            $scope.select(n);
+        }
+        loadImages();
+        $scope.ready = true;
+    }]);
+</script>

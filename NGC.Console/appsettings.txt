@@ -1,0 +1,1 @@
+﻿server=localhost;port=3306;database=ngc;uid=ngc;password=ngc

@@ -4,6 +4,7 @@ using System.Linq;
 using NGC.DAL.Base;
 using NGC.Model;
 using NGC.Common.Classes;
+using Microsoft.EntityFrameworkCore;
 
 namespace NGC.BLL
 {
@@ -36,9 +37,12 @@ namespace NGC.BLL
         public IEnumerable<Customer> GetByDate(DateTime dateTime)
         {
             dateTime = dateTime.Date;
-            DateTime dateFrom = dateTime.AddTicks(-1);
-            DateTime dateTo = dateTime.AddDays(1).AddTicks(-1);
-            return repository.QueryAll.Where(c => c.Date <= dateTo && c.Date >= dateFrom);
+            return repository.QueryAll.Where(c => c.Date != null && c.Date.Value.DayOfYear == dateTime.DayOfYear).Include(u=>u.Template);
+        }
+        public IEnumerable<Customer> GetBYDayOfYear(int dayOfYear)
+        {
+            return repository.QueryAll.Where(c => (c.Date != null && c.Date.Value.DayOfYear == dayOfYear) && (c.LastSent == null || c.LastSent < DateTime.Now.Date))
+                .Include(u => u.Template);
         }
         public Customer GetById(int id)
         {
