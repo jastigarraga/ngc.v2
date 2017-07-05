@@ -10,28 +10,28 @@
                 </md-list-item>
             </md-list>
         </md-tab>
-        <md-tab label="datos" layout="column" flex>
-            <div flex layout="row" layout-align="center center">
-                    <img ng-src="{{image.Src}}" ng-style="{'width':width,height:height}" style="max-width:100%;max-height:100%;height:auto;width:auto"/>
+        <md-tab  label="datos" layout="column" flex ng-disabled="!image">
+            <div flex layout="row" layout-align="center center" id="imgContainer" style="position:relative">
+                <canvas></canvas>
             </div>
             <form flex name="imgForm" layout="column">
                 <md-button class="md-raised" ng-click="openFileDialog()"><i class="fa fa-image"></i> Seleccionar Imagen</md-button>
                 <div layout="row">
                     <md-input-container>
                         <label>X</label>
-                        <input type="number" name="X" ng-model="image.X" />
+                        <input type="number" ng-change="paint()" name="X" ng-model="image.X" />
                     </md-input-container>
                     <md-input-container>
                         <label>Y</label>
-                        <input type="number" name="Y" ng-model="image.Y" />
+                        <input type="number" ng-change="paint()" name="Y" ng-model="image.Y" />
                     </md-input-container>
                     <md-input-container>
                         <label>Ancho</label>
-                        <input type="number" name="Width" ng-model="image.Width" />
+                        <input type="number" ng-change="paint()" name="Width" ng-model="image.Width" />
                     </md-input-container>
                     <md-input-container>
                         <label>Alto</label>
-                        <input type="number" name="Height" ng-model="image.Height" />
+                        <input type="number" ng-change="paint()" name="Height" ng-model="image.Height" />
                     </md-input-container>
                 </div>
                 <md-input-container>
@@ -48,10 +48,10 @@
     <div layout="row">
         <md-button class="marginless" ng-click="back()" ng-if="selectedTab==1"><i class="fa fa-arrow-left"></i></md-button>
         <md-button class="marginless" ng-if="selectedTab==0" ng-click="new()"><i class="fa fa-file"></i></md-button>
-        <md-button class="marginless"><i class="fa fa-save"></i></md-button>
-        <md-button class="marginless"><i class="fa fa-trash"></i></md-button>
+        <md-button class="marginless" ng-show="image" ng-click="save(image)"><i class="fa fa-save"></i></md-button>
+        <md-button class="marginless" ng-show="image" ng-click="delete(image)"><i class="fa fa-trash"></i></md-button>
     </div>
-    <input type="file" accept="image/*" style="display:none" id="imageFile"/>
+    <input type="file" style="display:none" accept="image/*"  id="imageFile"/>
     <div class="meraki-spinner" ng-hide="ready">
         <md-progress-circular md-mode="indeterminate" md-diameter="200"></md-progress-circular>
     </div>
@@ -60,7 +60,6 @@
 <script>
     angular.module("MerakiApp").controller("MerakiImageController", ["$mdDialog", "$mdToast", "$http", "$scope", function ($mdDialog, $mdToast, $http, $scope) { 
         function loadImages() {
-            $scope.ready = false;
             $http({
                 url: ApiRoutes.ApiMerakiImages
             }).then(function (response) {
@@ -70,20 +69,72 @@
                 $mdDialog.show($mdDialog.alert().title("Error").textContent(error.message).ok("Aceptar"));    
             });
         }
+        $scope.paint = function () { 
+            getCanvas();
+            $scope.canvas.width = $scope.img.width;
+            $scope.canvas.height = $scope.img.height;
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, $scope.canvas.width, $scope.canvas.height);
+            ctx.drawImage($scope.img, 0, 0);
+            ctx.fillStyle = "#000000";
+            ctx.fillRect($scope.image.X || 0, $scope.image.Y || 0, $scope.image.Width || 0, $scope.image.Height || 0);
+        };
+        $scope.canvas;
+        var ctx;
+        function getCanvas() {
+            if (!$scope.canvas) {
+                $scope.canvas = document.getElementsByTagName("canvas")[0];
+                ctx = $scope.canvas.getContext("2d");
+            }
+
+        };
+        $scope.remove = function (image) { 
+            $mdDialog.show($mdDialog.confirm()
+                    .title("Confirmar Eliminar")
+                    .textContent("Seguro que deséa eliminar la entrada?")
+                    .ok("Si").cancel("No"))
+                    .then(function () { 
+                var index = $scope.images.indexof(image);
+                $http({
+                    url: ApiRoutes.ApiMerakiImages + "?Id=" + image.Id,
+                    method: "DELETE"
+                }).then(function (response) { 
+                    $scope.images.splice(index, 1);
+                    }, function (error) { 
+
+                });
+            });
+
+        };
+        $scope.save = function (image) {
+            $http({
+                url: ApiRoutes.ApiMerakiImages,
+                method: image.Id ? "POST" : "PUT",
+                data: image
+            }).then(function (response) { 
+                var index = $scope.images.indexOf(image);
+                $scope.images[index] = image;
+                }, function (error) { 
+
+            });
+        };
         var fileInput = angular.element("#imageFile")[0];
         fileInput.onchange = function () {
             if (fileInput.files.length) {
-                $scope.ready = false;
                 var fileReader = new FileReader();
                 fileReader.onload = function () {
                     $scope.image.Src = this.result;
-                    $scope.ready = true;
+                    $scope.img = new Image();
+                    $scope.img.onload = function () {
+                        $scope.paint();
+                    };
+                    $scope.img.src = this.result;
                 };
                 fileReader.readAsDataURL(fileInput.files[0]);
             }
         };
         $scope.openFileDialog = function () {
-            $(fileInput).trigger("click");
+            $(fileInput).click();
         };
         $scope.back = function () {
             $scope.selectedTab = 0;
@@ -91,12 +142,21 @@
         $scope.select = function (img) {
             $scope.image = img;
             $scope.selectedTab = 1;
-        }
+            if (img.Src) {
+                var i = new Image();
+                i.onload = function () {
+                    $scope.img = i;
+                    $scope.paint();
+
+                };
+                i.src = img.Src;
+            }
+        };
         $scope.new = function () {
-            var n = { Name:"Nueva Imagen"};
+            var n = { Name: "Nueva Imagen" };
             $scope.images.push(n);
             $scope.select(n);
-        }
+        };
         loadImages();
         $scope.ready = true;
     }]);

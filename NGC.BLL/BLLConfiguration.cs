@@ -14,6 +14,7 @@ namespace NGC.BLL
             services.AddTransient<IUserBLL, UserBLL>();
             services.AddTransient<IConfigurationBLL, ConfigurationBLL>();
             services.AddTransient<IEmailTemplateBLL, EmailTemplateBLL>();
+            services.AddTransient<IMerakiTextImageBLL, MerakiTextImageBLL>();
         }
         public static IServiceCollection ConfigureBLL(this IServiceCollection services)
         {
