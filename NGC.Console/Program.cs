@@ -13,6 +13,7 @@ using System.IO;
 using Microsoft.Extensions.Options;
 using System.Linq;
 using System.Reflection;
+using NGC.Common.Extensions;
 
 namespace NGC.Console
 {
@@ -133,6 +134,14 @@ namespace NGC.Console
             WriteLine($"Enviando a {customer.Email} (útlimo envío en {customer.LastSent?.ToString() ?? "[nunca]"})");
             var body = customer.Template.Template.Replace("{0}", customer.Name).Replace("{1}", customer.Surname1)
                 .Replace("{2}", customer.Surname2);
+            var imageBLL = serviceProvider.GetService<IMerakiTextImageBLL>();
+            var images = imageBLL.GetAll();
+            foreach (var image in images)
+            {
+                string placeholder = "{Image:" + image.Id + "}";
+                if (body.Contains(placeholder))
+                body.Replace(placeholder,$"<img src='data:image/png;base64,{image.Draw(customer)}");
+            }
             var custBLL = serviceProvider.GetService<ICustomerBLL>();
 
             customer.LastSent = DateTime.Now;

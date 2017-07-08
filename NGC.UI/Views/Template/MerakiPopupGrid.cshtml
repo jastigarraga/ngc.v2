@@ -29,7 +29,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody ng-show="rows.length">
         <tr ng-repeat="row in rows">
             <td  ng-repeat="col in mpg.cols" >
 
@@ -55,7 +55,7 @@
             </td>
         </tr>
     </tbody>
-    <tfoot md-colors="{'background-color':'primary'}">
+    <tfoot md-colors="{'background-color':'primary'}" ng-show="rows.length">
         <tr>
             <td colspan="999">
                 <div layout="row" layout-align="space-between center">
@@ -81,3 +81,4 @@
         </tr>
     </tfoot>
 </table>
+<h2 ng-show="!rows.length">No hay registros</h2>
