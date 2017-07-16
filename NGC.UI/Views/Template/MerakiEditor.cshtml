@@ -54,11 +54,10 @@
                         <i class="fa fa-file-image-o"></i>
                     </md-card-avatar>
                     <md-card-header-text>
-                        <span class="md-title">En mi ordenador</span>
-                        <span class="md-subhead">La imágen se encuentra en mi disco duro, dispositivo portatil u otro equipo al que accedo por el sistema de archivos</span>
+                        <span class="md-title"><i class="fa fa-caret-down" ng-click="shownImageAction = 1"></i> En mi ordenador</span> 
                     </md-card-header-text>
                 </md-card-header>
-                <md-card-actions>
+                <md-card-actions ng-show="shownImageAction == 1">
                     <md-button md-colors="{background:'primary'}" ng-click="openFileDialog()">Buscar</md-button>
                 </md-card-actions>
             </md-card>
@@ -67,17 +66,32 @@
                     <md-card-avatar>
                         <i class="fa fa-globe"></i>
                     </md-card-avatar>
-                    <md-card-header-text>
-                        <span class="md-title">En una dirección web</span>
-                        <span class="md-suhead">La imágen se encuentra en un servidor al que accedo mediante algún protocolo web (http, ftp...)</span>
+                    <md-card-header-text >
+                        <span class="md-title"><i class="fa fa-caret-down" ng-click="shownImageAction = 2"></i> En una dirección web</span>
                     </md-card-header-text>
                 </md-card-header>
-                <md-card-actions>
+                <md-card-actions ng-show="shownImageAction == 2">
                     <md-input-container>
                         <label>Dirección</label>
                         <input type="url" ng-model="url"/>
                     </md-input-container>
                     <md-button md-colors="{background:'primary'}" ng-click="insertImage(url)">Añadir</md-button>
+                </md-card-actions>
+            </md-card>
+            <md-card>
+                <md-card-header>
+                    <md-card-avatar>
+                        <i class="fa fa-database"></i>
+                    </md-card-avatar>
+                    <md-card-header-text>
+                        <span class="md-title"><i class="fa fa-caret-down" ng-click="shownImageAction = 3"></i> Imagen con texto</span>
+                    </md-card-header-text>
+                </md-card-header>
+                <md-card-actions ng-show="shownImageAction == 3" layout="row">
+                    <md-select ng-model="selectedTextImage">
+                        <md-option ng-repeat="textImage in textImages" md-value="textImage">{{textImage.Name}}</md-option>
+                    </md-select>
+                    <md-button class="md-primary md-raised" ng-click="addTextImage()">Añadir</md-button>
                 </md-card-actions>
             </md-card>
         <md-dialog-actions>

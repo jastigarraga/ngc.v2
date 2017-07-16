@@ -4,3 +4,4 @@ D:\Proyectos\NGC\NGC.Model\bin\Release\netcoreapp1.1\NGC.Model.pdb
 D:\Proyectos\NGC\NGC.Model\obj\Release\netcoreapp1.1\NGC.Model.AssemblyInfo.cs
 D:\Proyectos\NGC\NGC.Model\obj\Release\netcoreapp1.1\NGC.Model.dll
 D:\Proyectos\NGC\NGC.Model\obj\Release\netcoreapp1.1\NGC.Model.pdb
+D:\Proyectos\NGC\NGC.Model\obj\Release\netcoreapp1.1\NGC.Model.csprojResolveAssemblyReference.cache

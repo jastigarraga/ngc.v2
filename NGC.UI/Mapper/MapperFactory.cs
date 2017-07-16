@@ -14,6 +14,7 @@ namespace NGC.UI.Mapper
                 .ForMember(i=>i.Src,opts=>opts.MapFrom(entity=>$"data:image/png;base64,{Convert.ToBase64String(entity.Bytes)}"));
             cfg.CreateMap<MerakiTextImageModel, MerakiTextImage>()
                 .ForMember(entity=>entity.Bytes,opts=>opts.MapFrom(model=>Convert.FromBase64String(model.Src.Replace("data:image/png;base64,",""))));
+            cfg.CreateMap<MerakiTextImage, TextImageComboModel>();
 
             return cfg;
         }

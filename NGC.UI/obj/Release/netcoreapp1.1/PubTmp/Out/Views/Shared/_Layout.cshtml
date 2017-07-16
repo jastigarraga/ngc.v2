@@ -18,7 +18,8 @@
         var ApiRoutes= {
             Customers: "@Html.Raw(Url.Action("customers","api"))",
             EmailConfig: "@Html.Raw(Url.Action("emailconfig","api"))",
-            Templates: "@Html.Raw(Url.Action("templates","api"))"
+            Templates: "@Html.Raw(Url.Action("templates","api"))",
+            ApiMerakiImages: "@Html.Raw(Url.Action("merakiimage", "api"))"
         }
             var Templates = {
             EditorBase:"@Html.Raw(Url.Action("EditorBase","Template"))",
@@ -30,7 +31,6 @@
             MerakiPopupGrid:"@Html.Raw(Url.Action("MerakiPopupGrid","Template"))"
         };
     </script>
-
     <meta charset="utf-8" />
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#3f51b5" />
@@ -73,6 +73,11 @@
            <md-list-item flex class="meraki-menu-item" layout="row">
                <a class="md-button md-no-style" href="~/Customer">
                    <i class="fa fa-address-book"></i> Clientes
+               </a>
+           </md-list-item>
+           <md-list-item flex class="meraki-menu-item">
+               <a class="md-button md-no-style" href="~/MerakiImage">
+                   <i class="fa fa-image"></i> Imagenes
                </a>
            </md-list-item>
            <md-list-item flex class="meraki-menu-item">

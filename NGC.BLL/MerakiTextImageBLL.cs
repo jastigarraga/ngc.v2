@@ -18,5 +18,10 @@ namespace NGC.BLL
         {
             return repository.QueryAll.Where(i => i.Id == id).FirstOrDefault();
         }
+
+        public IQueryable<MerakiTextImage> QueryAll()
+        {
+            return repository.QueryAll;
+        }
     }
 }

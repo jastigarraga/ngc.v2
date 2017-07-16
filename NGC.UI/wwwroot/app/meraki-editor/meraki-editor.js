@@ -1,5 +1,5 @@
 ﻿angular.module("Meraki.UI")
-    .directive("merakiEditor",["$mdDialog", function ($mdDialog) {
+    .directive("merakiEditor",["$mdDialog","$http", function ($mdDialog,$http) {
         return {
             require: "ngModel",
             scope: {
@@ -7,6 +7,13 @@
             },
             templateUrl: Templates.MerakiEditor,
             link: function (s, e, a, c) {
+                $http({
+                    url: ApiRoutes.ComboMerakiImages
+                }).then(function (response) {
+                    s.textImages = response.data;
+                    }, function (error) {
+
+                });
                 var fileInput = e.find("#fileInput")[0];
                 var text = angular.element(e).find(".text-iframe")[0];
                 text.contentDocument.designMode = "on"

@@ -71,6 +71,10 @@ namespace NGC.UI.Controllers
             }
             return BadRequest("La imagen no existe");
         }
-
+        [HttpGet("api/merakiimagecombo")]
+        public IEnumerable<MerakiTextImageModel> GetComboModel()
+        {
+            return ImageBLL.QueryAll().Select(ti => Mapper.Map<MerakiTextImageModel>(ti));
+        }
     }
 }

@@ -15,7 +15,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody ng-show="rows.length > 0">
         <tr ng-show="inserting">
             <td ng-repeat="col in table.columns" ng-include="col.editTemplateUrl"></td>
             <td>
@@ -36,7 +36,7 @@
             <td colspan="{{table.columns.length}}">No hay registros</td>
         </tr>
     </tbody>
-    <tfoot ng-if="table.total" md-colors="{background:'primary'}">
+    <tfoot ng-if="rows.length > 0" md-colors="{background:'primary'}">
         <tr>
             <td colspan="{{table.columns.length + 1}}">
                 <div>

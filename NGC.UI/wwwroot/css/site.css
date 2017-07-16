@@ -194,6 +194,21 @@ meraki-editor iframe{
     footer{
         display:none
     }
+    .md-input-container._md-datepicker-floating-label._md-datepicker-has-calendar-icon{
+        display:flex
+    }
+    #imageDialog .md-subhead{
+        display:none;
+    }
+    #imageDialog h2 {
+        margin-bottom: 0;
+    }
+    #imageDialog md-card-header {
+        padding-bottom: 0 !important;
+    }
+    #imageDialog md-input-container {
+        margin: 0 !important;
+    }
 }
 .config .title-icon{
     font-size: 2em;
@@ -231,4 +246,9 @@ meraki-editor iframe{
 .scroll100y {
     height: 100px;
     overflow-y: auto;
+}
+@media (max-height: 400px){
+    md-dialog{
+        max-height: unset !important;
+    }
 }
