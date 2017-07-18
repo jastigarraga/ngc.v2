@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "78ed0e50cb701e041f7a541d8acd628ee9fc27c5"
+    "signature": "694f441c26ee3cf6566d81cb207fdadf1b05d9a7"
   },
   "compilationOptions": {},
   "targets": {
@@ -16,9 +16,9 @@
           "NGC.BLL.dll": {}
         }
       },
-      "mailkit/1.16.1": {
+      "mailkit/1.16.2": {
         "dependencies": {
-          "MimeKit": "1.16.1",
+          "MimeKit": "1.16.2",
           "Portable.BouncyCastle": "1.8.1.2",
           "System.Data.Common": "4.3.0",
           "System.Net.NetworkInformation": "4.3.0",
@@ -205,7 +205,7 @@
           "lib/netstandard1.0/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "mimekit/1.16.1": {
+      "mimekit/1.16.2": {
         "dependencies": {
           "Portable.BouncyCastle": "1.8.1.2",
           "System.Data.Common": "4.3.0",
@@ -436,7 +436,7 @@
       },
       "ngc.common/1.0.0": {
         "dependencies": {
-          "MailKit": "1.16.1",
+          "MailKit": "1.16.2",
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "1.1.2",
           "NGC.Model": "1.0.0",
           "ZKWeb.System.Drawing": "3.0.0",
@@ -471,12 +471,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "mailkit/1.16.1": {
+    "mailkit/1.16.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1X68UT4Nx9RmItCM9nkUGIYAsYLMghCQ+bm1ZOlkYTrobvx8KbyvH7C99Us0gISbbcWNIMo0lroV0wIjCi6w2g==",
-      "path": "mailkit/1.16.1",
-      "hashPath": "mailkit.1.16.1.nupkg.sha512"
+      "sha512": "sha512-+TmqWZlDbON05CpqiH6N++LUtqwW6SjUzc526srAogqJvjeTuAYN6vni5jc+riNBc3CFKS23VlyYqOxlZ943IA==",
+      "path": "mailkit/1.16.2",
+      "hashPath": "mailkit.1.16.2.nupkg.sha512"
     },
     "microsoft.aspnetcore.cryptography.internal/1.1.2": {
       "type": "package",
@@ -625,12 +625,12 @@
       "path": "microsoft.extensions.primitives/1.1.0",
       "hashPath": "microsoft.extensions.primitives.1.1.0.nupkg.sha512"
     },
-    "mimekit/1.16.1": {
+    "mimekit/1.16.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5d0AImzeQ3VCpLuo3BHRTogmSxZ6LQMklNg0JHzVylgqeenogX47JAK6s9P1DcEUW7EHeWcHW07fASC4HmKbWg==",
-      "path": "mimekit/1.16.1",
-      "hashPath": "mimekit.1.16.1.nupkg.sha512"
+      "sha512": "sha512-n/yoKMfFXUSUzQPz+wvl+eArDA01XntJ3z40DBUduAEpx8QXEpLMRhr177Lwi23dHRA4/aDqb3+X2b6r/X/1hw==",
+      "path": "mimekit/1.16.2",
+      "hashPath": "mimekit.1.16.2.nupkg.sha512"
     },
     "mysqlconnector/0.19.2": {
       "type": "package",

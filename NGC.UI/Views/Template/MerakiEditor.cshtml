@@ -87,11 +87,11 @@
                         <span class="md-title"><i class="fa fa-caret-down" ng-click="shownImageAction = 3"></i> Imagen con texto</span>
                     </md-card-header-text>
                 </md-card-header>
-                <md-card-actions ng-show="shownImageAction == 3" layout="row">
+                <md-card-actions ng-show="shownImageAction == 3" layout="column">
                     <md-select ng-model="selectedTextImage">
-                        <md-option ng-repeat="textImage in textImages" md-value="textImage">{{textImage.Name}}</md-option>
+                        <md-option ng-repeat="textImage in textImages" value="{{textImage.Id}}">{{textImage.Name}}</md-option>
                     </md-select>
-                    <md-button class="md-primary md-raised" ng-click="addTextImage()">Añadir</md-button>
+                    <md-button class="md-primary md-raised" style="align-self:flex-start" ng-click="addTextImage()">Añadir</md-button>
                 </md-card-actions>
             </md-card>
         <md-dialog-actions>

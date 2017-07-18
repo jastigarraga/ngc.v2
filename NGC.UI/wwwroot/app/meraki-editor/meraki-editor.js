@@ -69,7 +69,35 @@
                         }
                     };
                     angular.element(fileInput).trigger("click");
-                }
+                };
+                s.addTextImage = function () {
+                    var selection = text.contentDocument.getSelection();
+                    var img = text.contentDocument.createElement("img");
+                    img.src = "{Image:" + s.selectedTextImage + "}";
+                    if (selection.rangeCount != 0) {
+                        var range = selection.getRangeAt(0);
+                        range.deleteContents();
+                        range.insertNode(img);
+                    } else {
+                        text.appendChild(img);
+                    }
+                    s.html = text.contentDocument.body.innerHTML;
+                    s.closeDialog();
+                };
+                s.link = function ($event) {
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    $mdDialog.show(
+                        $mdDialog.prompt()
+                            .title("Introduzca Hipervínculo")
+                            .textContent("Por favor, introduzca la dirección")
+                            .placeholder("http://www.direccion.com")
+                            .ok("Aceptar")
+                            .cancel("Cancel")
+                    ).then(function(content){
+                        s.execCommand($event,"createLink", content);
+                        });
+                };
             }
         };
     }]);
