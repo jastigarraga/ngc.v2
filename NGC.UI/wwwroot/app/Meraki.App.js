@@ -46,6 +46,9 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
         $scope.openSidenav = function () {
             $mdSidenav("left").toggle();
         };
+        $scope.closeSidenav = function () {
+            $mdSidenav("left").close();
+        };
         $scope.loginFormSubmit = function (e) {
             if (!$scope.loginForm.$valid) {
                 e.preventDefault();
