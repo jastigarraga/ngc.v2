@@ -30,7 +30,7 @@
             <md-option value="Tahoma">Tahoma</md-option>
             <md-option value="Times New Roman">TImes New Roman</md-option>
         </md-select>
-        <md-select ng-model="fontSize" class="no-margin" ng-click="execCommand($event,'fontSize',fontSize)">
+        <md-select ng-model="fontSize" class="no-margin" ng-change="execCommand($event,'fontSize',fontSize)">
             <md-option value="1">1</md-option> 
             <md-option value="2">2</md-option>   
             <md-option value="3">3</md-option>   

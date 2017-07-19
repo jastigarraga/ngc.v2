@@ -32,7 +32,55 @@
                 text.contentDocument.body.onkeydown = function () {
                     s.$apply(function () { s.html = text.contentDocument.body.innerHTML; });
                 };
-
+                function getSelectedNodes() {
+                    var selectedNodes = [];
+                    var selection = text.contentDocument.getSelection();
+                    if (selection.rangeCount > 0) {
+                        var range = selection.getRangeAt(0);
+                        var allElements = range.commonAncestorContainer.getElementsByTagName("*");
+                        for (var i = 0; i < allElements.length; i++) {
+                            if (selection.containsNode(allElements[i])) {
+                                selectedNodes.push(allElements[i]);
+                            }
+                        }
+                    }
+                    return selectedNodes;
+                }
+                function getFontSizes(cb) {
+                    var sel = text.contentDocument.getSelection();
+                    if (sel.rangeCount > 0) {
+                        var r = sel.getRangeAt(0);
+                        walk(selection, range.startContainer, range.endContainer, function (sel, currEl, currVal, next) {
+                            debugger;
+                        }, cb);
+                    }
+                    cb();
+                }
+                function walk(selection,from, to, next,cb,currValue) {
+                    if (from === to) {
+                        next(selection,from, currValue, function (value) {
+                            cb(value);
+                        });
+                    } else {
+                        from = nextNode(from);
+                        next(selection,from, currValue, function (value) {
+                            walk(selection, from, to, next, cb, currValue);
+                        });
+                    }
+                }
+                function nextNode(node) {
+                    if (node.hasChildNodes()) {
+                        return node.firstChild;
+                    } else {
+                        while (node && !node.nextSibling) {
+                            node = node.parentNode;
+                        }
+                        if (!node) {
+                            return null;
+                        }
+                        return node.nextSibling;
+                    }
+                }
                 s.execCommand = function ($event,com,arg) {
                     text.contentDocument.execCommand(com, false, arg);
                     s.html = text.contentDocument.body.innerHTML;
