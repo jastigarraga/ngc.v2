@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace NGC.UI
 {
@@ -45,6 +46,10 @@ namespace NGC.UI
             }).AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             services.AddDbContext<MerakiContext>((options) =>
             {
+            });
+            services.Configure<FormOptions>(x=> {
+                x.MultipartBodyLengthLimit = long.MaxValue;
+                x.ValueLengthLimit = int.MaxValue;
             });
             BLL.BLLConfiguration.Configure(services);
             services.Configure<MerakiConfiguration>(Configuration);

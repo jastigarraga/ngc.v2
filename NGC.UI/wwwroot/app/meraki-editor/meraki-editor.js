@@ -27,6 +27,30 @@
                     }
                     text.contentDocument.body.innerHTML = c.$modelValue;
                 };
+                angular.element(text.contentDocument.body).css({
+                    "transform-origin": "top left",
+                    margin: 0,
+                    background: "#FFFFFF"
+                });
+                angular.element(text.contentDocument.body.parentElement).css({
+                    margin: 0,
+                    background: "#F1F1F1"
+                });
+                var scale = 1;
+                angular.element(text.contentDocument).on("mousewheel","body", function (evt) {
+                    if (evt.ctrlKey) {
+                        if (evt.originalEvent.wheelDelta < 0) {
+                            if (scale > 0.11) {
+                                scale -= 0.1;
+                            }
+                        } else {
+                            scale += 0.1;
+                        }
+                        angular.element(text.contentDocument.body).css("transform", "matrix(" + scale + ",0,0," + scale + ",0,0)");
+                        evt.preventDefault();
+                        evt.stopPropagation();
+                    }
+                });
                 c.$parsers = [];
                 c.$formatters = [];
                 text.contentDocument.body.onkeydown = function () {
@@ -99,8 +123,19 @@
                 s.closeDialog = function () {
                     $mdDialog.hide();
                 };
-                s.insertImage = function (img) {
-                    s.execCommand(null, "insertImage", img);
+                s.insertImage = function (src) {
+                    var img = text.contentDocument.createElement("img");
+                    img.src = src;
+                    img.style = "width:" + s.width + ";height:" + s.height + ";";
+                    var sel = text.contentDocument.getSelection();
+                    if (sel.rangeCount > 0) {
+                        var r = sel.getRangeAt(0);
+                        r.deleteContents();
+                        r.insertNode(img);
+                    } else {
+                        text.contentDocument.body.append(img);
+                    }
+                    s.html = text.contentDocument.body.innerHTML;
                     $mdDialog.hide();
                 };
                 s.openFileDialog = function () {

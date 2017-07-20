@@ -57,7 +57,17 @@
                         <span class="md-title"><i class="fa fa-caret-down" ng-click="shownImageAction = 1"></i> En mi ordenador</span> 
                     </md-card-header-text>
                 </md-card-header>
-                <md-card-actions ng-show="shownImageAction == 1">
+                <md-card-actions ng-show="shownImageAction == 1" layout="column">
+                    <div layout="row" layout-align="space-around center">
+                        <md-input-container>
+                            <label>Anchura</label>
+                            <input ng-model="width"/>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Altura</label>
+                            <input ng-model="height"/>
+                        </md-input-container>
+                    </div>
                     <md-button md-colors="{background:'primary'}" ng-click="openFileDialog()">Buscar</md-button>
                 </md-card-actions>
             </md-card>
@@ -66,11 +76,21 @@
                     <md-card-avatar>
                         <i class="fa fa-globe"></i>
                     </md-card-avatar>
-                    <md-card-header-text >
+                    <md-card-header-text>
                         <span class="md-title"><i class="fa fa-caret-down" ng-click="shownImageAction = 2"></i> En una dirección web</span>
                     </md-card-header-text>
                 </md-card-header>
-                <md-card-actions ng-show="shownImageAction == 2">
+                <md-card-actions ng-show="shownImageAction == 2" layout="column">
+                    <div layout="row" layout-align="space-around center">
+                        <md-input-container>
+                            <label>Anchura</label>
+                            <input ng-model="width" />
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Altura</label>
+                            <input ng-model="height" />
+                        </md-input-container>
+                    </div>
                     <md-input-container>
                         <label>Dirección</label>
                         <input type="url" ng-model="url"/>
@@ -88,10 +108,20 @@
                     </md-card-header-text>
                 </md-card-header>
                 <md-card-actions ng-show="shownImageAction == 3" layout="column">
+                    <div layout="row" layout-align="space-around center">
+                        <md-input-container>
+                            <label>Anchura</label>
+                            <input ng-model="width" />
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Altura</label>
+                            <input ng-model="height" />
+                        </md-input-container>
+                    </div>
                     <md-select ng-model="selectedTextImage">
                         <md-option ng-repeat="textImage in textImages" value="{{textImage.Id}}">{{textImage.Name}}</md-option>
                     </md-select>
-                    <md-button class="md-primary md-raised" style="align-self:flex-start" ng-click="addTextImage()">Añadir</md-button>
+                    <md-button class="md-primary md-raised" ng-click="addTextImage()">Añadir</md-button>
                 </md-card-actions>
             </md-card>
         <md-dialog-actions>

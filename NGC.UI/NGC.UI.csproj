@@ -8,9 +8,8 @@
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
 
-
-
   <ItemGroup>
+    <Content Update="wwwroot\node_modules\jquery\src\jgestures.min.js" />
     <Content Update="wwwroot\app\meraki-editor\meraki-editor.js" />
     <Content Update="wwwroot\app\meraki-grid\meraki-popup-grid.js" />
     <Content Update="wwwroot\app\meraki-grid\meraki-grid.js" />
