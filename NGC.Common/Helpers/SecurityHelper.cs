@@ -11,6 +11,10 @@ namespace NGC.Common.Helpers
     {
         public static Password Hash(string password, byte[] salt = null)
         {
+            if(password == null)
+            {
+                return null;
+            }
             if(salt == null)
             {
                 using(var rnd = RandomNumberGenerator.Create())
@@ -57,6 +61,10 @@ namespace NGC.Common.Helpers
         }
         public static bool Verify(string raw,byte[] salt,string hash)
         {
+            if (string.IsNullOrWhiteSpace(raw))
+            {
+                return false;
+            }
             Password password = Hash(raw, salt);
             return hash == password.Hash;
         }

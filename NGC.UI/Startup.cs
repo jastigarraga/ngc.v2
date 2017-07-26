@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Net;
 
 namespace NGC.UI
 {
@@ -75,7 +77,22 @@ namespace NGC.UI
                 AccessDeniedPath = new PathString("/Forbidden/"),
                 AuthenticationScheme = "Loged",
                 AutomaticAuthenticate = true,
-                AutomaticChallenge = true
+                AutomaticChallenge = true,
+                Events = new CookieAuthenticationEvents()
+                {
+                    OnRedirectToLogin = ctx =>{
+                        if(ctx.Request.Path.StartsWithSegments("/api") && 
+                        ctx.Response.StatusCode == (int)HttpStatusCode.OK)
+                        {
+                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                        }
+                        else
+                        {
+                            ctx.Response.Redirect(ctx.RedirectUri);
+                        }
+                        return Task.FromResult(0);
+                    }
+                }
             });
            
             app.UseStaticFiles();

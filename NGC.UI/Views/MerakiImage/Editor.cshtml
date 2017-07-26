@@ -88,6 +88,87 @@
             }
 
         };
+        var startX = null;
+        var startY = null;
+        var touches = {};
+        angular.element(document).on("touchmove", "canvas", function (evt) {
+            if (evt.originalEvent.touches.length > 1 && evt.originalEvent.changedTouches.length > 0) {
+                var currTouches = [];
+                for (var i = 0; i < evt.changedTouches.length; i++) {
+                    var id = evt.changedTouches[i].identifier;
+                    if (typeof touches[id] !== "undefined") {
+                        currTouches.push({
+                            deltaX: evt.touches[i].clientX - touches[id].clientX,
+                            deltaY: evt.touches[i].clientY - touches[id].clientY
+                        });
+                    } else {
+                        currTouches.push({
+                            deltaX: 0,
+                            deltaY: 0
+                        });
+                        touches[id] = evt.changedTouches[i];
+                    }
+                }
+                if (currTouches.length < 2) {
+                    return;
+                }
+                var deltaX = Math.floor(Math.min(currTouches[0].deltaX, currTouches[1].deltaX) / 10);
+                var deltaY = Math.floor(Math.min(currTouches[0].deltaY, currTouches[1].deltaY) / 10);
+                if (currTouches[0].deltaX * currTouches[1].deltaX > 0 || currTouches[0].deltaY * currTouches[1].deltaY > 0) {
+                    
+                    $scope.$apply(function () {
+                        $scope.image.X -= deltaY;
+                        $scope.image.Y -= deltaX;
+                        $scope.paint();
+                    });
+
+                } else {
+                    $scope.$apply(function () {
+                        $scope.image.Width += deltaX;
+                        $scope.image.Height += deltaY;
+                        $scope.paint();
+                    });
+                }
+                evt.preventDefault();
+                evt.stopPropagation();
+            } else {
+                touches = { };
+
+            }
+        });
+        angular.element(document).on("mousemove", "canvas", function (evt) {
+            if (evt.ctrlKey && evt.buttons == 1) {
+                if (startX !== null) {
+                    $scope.$apply(function () {
+                        $scope.image.X += evt.clientX - startX;
+                        $scope.image.Y += evt.clientY - startY;
+                        $scope.paint();
+                    });
+                    evt.preventDefault();
+                    evt.stopPropagation();
+                }
+                startX = evt.clientX;
+                startY = evt.clientY;
+            } else if (evt.shiftKey && evt.buttons == 1) {
+
+                if (startX !== null) {
+                $scope.$apply(function () {
+                        $scope.image.Width += evt.clientX - startX;
+                        $scope.image.Height += evt.clientY - startY;
+                        $scope.paint();
+                    });
+                    evt.stopPropagation();
+                    evt.preventDefault();
+                }
+                startX = evt.clientX;
+                startY = evt.clientY;
+            }
+        });
+        angular.element(document).on("mouseup", function () {
+            startX = null;
+            startY = null;
+            console.log("se fini");
+        });
         $scope.remove = function (image) { 
             $mdDialog.show($mdDialog.confirm()
                     .title("Confirmar Eliminar")
