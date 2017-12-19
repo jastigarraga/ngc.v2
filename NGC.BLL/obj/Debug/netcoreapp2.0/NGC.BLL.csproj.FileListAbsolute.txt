@@ -1,0 +1,15 @@
+D:\Proyectos\NGC\NGC.BLL\obj\Debug\netcoreapp2.0\NGC.BLL.csprojResolveAssemblyReference.cache
+D:\Proyectos\NGC\NGC.BLL\obj\Debug\netcoreapp2.0\NGC.BLL.csproj.CoreCompileInputs.cache
+D:\Proyectos\NGC\NGC.BLL\obj\Debug\netcoreapp2.0\NGC.BLL.AssemblyInfoInputs.cache
+D:\Proyectos\NGC\NGC.BLL\obj\Debug\netcoreapp2.0\NGC.BLL.AssemblyInfo.cs
+D:\Proyectos\NGC\NGC.BLL\bin\Debug\netcoreapp2.0\NGC.BLL.deps.json
+D:\Proyectos\NGC\NGC.BLL\bin\Debug\netcoreapp2.0\NGC.BLL.dll
+D:\Proyectos\NGC\NGC.BLL\bin\Debug\netcoreapp2.0\NGC.BLL.pdb
+D:\Proyectos\NGC\NGC.BLL\bin\Debug\netcoreapp2.0\NGC.Common.dll
+D:\Proyectos\NGC\NGC.BLL\bin\Debug\netcoreapp2.0\NGC.DAL.dll
+D:\Proyectos\NGC\NGC.BLL\bin\Debug\netcoreapp2.0\NGC.Model.dll
+D:\Proyectos\NGC\NGC.BLL\bin\Debug\netcoreapp2.0\NGC.Common.pdb
+D:\Proyectos\NGC\NGC.BLL\bin\Debug\netcoreapp2.0\NGC.DAL.pdb
+D:\Proyectos\NGC\NGC.BLL\bin\Debug\netcoreapp2.0\NGC.Model.pdb
+D:\Proyectos\NGC\NGC.BLL\obj\Debug\netcoreapp2.0\NGC.BLL.dll
+D:\Proyectos\NGC\NGC.BLL\obj\Debug\netcoreapp2.0\NGC.BLL.pdb

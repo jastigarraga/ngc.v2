@@ -11,7 +11,7 @@ namespace NGC.DAL.Base
         public static void MapMerakiImage(ModelBuilder builder)
         {
             builder.Entity<MerakiTextImage>(b => {
-                b.ForMySqlToTable("meraki_text_image");
+                b.ToTable("meraki_text_image");
 
                 b.HasKey(i => i.Id);
                 b.Property(i => i.Name).HasColumnType("varchar(100)");
@@ -28,7 +28,7 @@ namespace NGC.DAL.Base
         public static void MapMerakiPhoto(ModelBuilder builder)
         {
             builder.Entity<Photo>(b => {
-                b.ForMySqlToTable("meraki_photo");
+                b.ToTable("meraki_photo");
 
                 b.HasKey(p => p.Id);
                 b.Property(p => p.Path);
@@ -42,7 +42,7 @@ namespace NGC.DAL.Base
         public static void MapUser(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>((build)=> {
-                build.ForMySqlToTable("user");
+                build.ToTable("user");
 
                 build.Property(u => u.Id).HasColumnName("id").HasColumnType("int");
                 build.Property(u => u.Login).HasColumnType("login").HasColumnType("varchar(40)").HasMaxLength(40);
@@ -53,7 +53,7 @@ namespace NGC.DAL.Base
         public static void MapCustomer(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>(config=> {
-                config.ForMySqlToTable("customer");
+                config.ToTable("customer");
 
                 config.Property(u => u.Id).HasColumnName("id");
                 config.Property(u => u.Name).HasColumnName("name").HasColumnType("varchar(40)").HasMaxLength(40);
@@ -71,7 +71,7 @@ namespace NGC.DAL.Base
         public static void MapConfiguration(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Configuration>(config => {
-                config.ForMySqlToTable("configuration");
+                config.ToTable("configuration");
                 config.HasKey(c => c.Key);
 
                 config.Property(u => u.Key).HasColumnName("key").HasColumnType("varchar(40)").HasMaxLength(40);
@@ -81,7 +81,7 @@ namespace NGC.DAL.Base
         public static void MapEmailTemplate(ModelBuilder builder)
         {
             builder.Entity<EmailTemplate>(cfg=> {
-                cfg.ForMySqlToTable("emailtemplate");
+                cfg.ToTable("emailtemplate");
                 cfg.HasKey(e => e.Id);
 
 
@@ -90,7 +90,7 @@ namespace NGC.DAL.Base
                 cfg.Property(e => e.Subject).HasColumnType("subj").HasColumnType("varchar(255)");
                 cfg.Property(e => e.Template).HasColumnName("template").HasColumnType("text");
 
-                cfg.HasMany(e => e.Customers).WithOne(c => c.Template).HasForeignKey(c => c.IdTemplate).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Restrict);
+                cfg.HasMany(e => e.Customers).WithOne(c => c.Template).HasForeignKey(c => c.IdTemplate).OnDelete(DeleteBehavior.Restrict);
             });
         }
     }

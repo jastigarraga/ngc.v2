@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using NGC.BLL.Interfaces;
 using NGC.Model;
@@ -28,12 +30,12 @@ namespace NGC.UI.Controllers.Base
             set {
                 if (value == null)
                 {
-                    HttpContext.Authentication.SignInAsync("Loged", Request.HttpContext.User);
+                    HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
                 }
                 else
                 {
                     Request.HttpContext.User = new System.Security.Claims.ClaimsPrincipal(value);
-                    HttpContext.Authentication.SignInAsync("Loged", Request.HttpContext.User).Wait();
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme ,Request.HttpContext.User).Wait();
                 }
                 merakiUser = value;
             }

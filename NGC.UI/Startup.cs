@@ -12,6 +12,9 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Net;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Options;
+using System.Text.Encodings.Web;
 
 namespace NGC.UI
 {
@@ -54,8 +57,29 @@ namespace NGC.UI
             services.Configure<MerakiConfiguration>(Configuration);
             services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.ConfigureBLLContainers();
+            services.AddAuthentication(cfg =>
+            {
+                cfg.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                cfg.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                
+            }).AddCookie(opts => {
+                opts.AccessDeniedPath = new PathString("/Login");
+                opts.LoginPath = new PathString("/Login");
+                opts.Events.OnRedirectToLogin = (ctx) => {
+                    if (ctx.Request.Path.StartsWithSegments("/api") &&
+                        ctx.Response.StatusCode == (int)HttpStatusCode.OK)
+                    {
+                        ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    }
+                    else
+                    {
+                        ctx.Response.Redirect(ctx.RedirectUri);
+                    }
+                    return Task.FromResult(0);
+                };
+               
+            });
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
@@ -70,29 +94,30 @@ namespace NGC.UI
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            app.UseCookieAuthentication(new CookieAuthenticationOptions() {
-                CookieName="MerakiAuthCookie",
-                LoginPath = new PathString("/Login"),
-                AccessDeniedPath = new PathString("/Forbidden/"),
-                AuthenticationScheme = "Loged",
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
-                Events = new CookieAuthenticationEvents()
-                {
-                    OnRedirectToLogin = ctx =>{
-                        if(ctx.Request.Path.StartsWithSegments("/api") && 
-                        ctx.Response.StatusCode == (int)HttpStatusCode.OK)
-                        {
-                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                        }
-                        else
-                        {
-                            ctx.Response.Redirect(ctx.RedirectUri);
-                        }
-                        return Task.FromResult(0);
-                    }
-                }
-            });
+            app.UseAuthentication();
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions() {
+            //    CookieName="MerakiAuthCookie",
+            //    LoginPath = new PathString("/Login"),
+            //    AccessDeniedPath = new PathString("/Forbidden/"),
+            //    AuthenticationScheme = "Loged",
+            //    AutomaticAuthenticate = true,
+            //    AutomaticChallenge = true,
+            //    Events = new CookieAuthenticationEvents()
+            //    {
+            //        OnRedirectToLogin = ctx =>{
+            //            if(ctx.Request.Path.StartsWithSegments("/api") && 
+            //            ctx.Response.StatusCode == (int)HttpStatusCode.OK)
+            //            {
+            //                ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            //            }
+            //            else
+            //            {
+            //                ctx.Response.Redirect(ctx.RedirectUri);
+            //            }
+            //            return Task.FromResult(0);
+            //        }
+            //    }
+            //});
            
             app.UseStaticFiles();
             

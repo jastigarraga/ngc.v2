@@ -4,6 +4,7 @@ using NGC.UI.Models;
 using NGC.Model;
 using NGC.BLL.Interfaces;
 using System;
+using System.Linq;
 
 namespace NGC.UI.Controllers
 {
@@ -24,7 +25,7 @@ namespace NGC.UI.Controllers
                 {
                     MerakiUser = user;
 
-                    return Redirect("~/");
+                    return Redirect( HttpContext.Request.Query["ReturnUrl"].FirstOrDefault() ?? "~/");
                 }
             }
             ViewBag.Error = "Nombre de usuario y/o contraseña incorrectos";
@@ -39,6 +40,7 @@ namespace NGC.UI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.ReturnUrl = Request.Query["ReturnUrl"];
             return View();
         }
         [HttpPost("api/login")]

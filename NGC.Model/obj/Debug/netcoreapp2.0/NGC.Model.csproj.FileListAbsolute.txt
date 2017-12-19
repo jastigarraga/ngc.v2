@@ -1,0 +1,9 @@
+D:\Proyectos\NGC\NGC.Model\bin\Debug\netcoreapp2.0\NGC.Model.deps.json
+D:\Proyectos\NGC\NGC.Model\bin\Debug\netcoreapp2.0\NGC.Model.dll
+D:\Proyectos\NGC\NGC.Model\bin\Debug\netcoreapp2.0\NGC.Model.pdb
+D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp2.0\NGC.Model.csprojResolveAssemblyReference.cache
+D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp2.0\NGC.Model.csproj.CoreCompileInputs.cache
+D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp2.0\NGC.Model.AssemblyInfoInputs.cache
+D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp2.0\NGC.Model.AssemblyInfo.cs
+D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp2.0\NGC.Model.dll
+D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp2.0\NGC.Model.pdb
