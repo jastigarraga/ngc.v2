@@ -7,3 +7,5 @@ D:\Proyectos\NGC\NGC.DAL\obj\Debug\netcoreapp1.1\NGC.DAL.csprojResolveAssemblyRe
 D:\Proyectos\NGC\NGC.DAL\obj\Debug\netcoreapp1.1\NGC.DAL.AssemblyInfo.cs
 D:\Proyectos\NGC\NGC.DAL\obj\Debug\netcoreapp1.1\NGC.DAL.dll
 D:\Proyectos\NGC\NGC.DAL\obj\Debug\netcoreapp1.1\NGC.DAL.pdb
+D:\Proyectos\NGC\NGC.DAL\obj\Debug\netcoreapp1.1\NGC.DAL.csproj.CoreCompileInputs.cache
+D:\Proyectos\NGC\NGC.DAL\obj\Debug\netcoreapp1.1\NGC.DAL.AssemblyInfoInputs.cache

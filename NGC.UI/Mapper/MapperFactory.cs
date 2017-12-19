@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using NGC.Common.Extensions;
 using NGC.Model;
 using NGC.UI.Models;
 using System;
+using System.IO;
 using System.Linq;
 namespace NGC.UI.Mapper
 {
@@ -30,7 +32,8 @@ namespace NGC.UI.Mapper
         {
             cfg.CreateMap<Customer, CustomerModel>();
             cfg.CreateMap<CustomerModel, Customer>()
-                .ForMember(c => c.Template, opts => opts.Ignore());
+                .ForMember(c => c.Template, opts => opts.Ignore())
+                .ForMember(c => c.Photos, opts=>opts.Ignore());
 
             return cfg;
         }
@@ -53,11 +56,23 @@ namespace NGC.UI.Mapper
                 cfg.MapUser()
                     .MapCustomer()
                     .MapEmailTemplate()
-                    .MapMerakiTextImage();
+                    .MapMerakiTextImage()
+                    .MapPhoto();
             });
             configuration.AssertConfigurationIsValid();
             instance = configuration.CreateMapper();
             return instance;
+        }
+        public static IMapperConfigurationExpression MapPhoto(this IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<Photo, PhotoModel>()
+                    .ForMember(m => m.File, opts => opts.Ignore())
+                    .ForMember(m => m.src, opts => opts.ResolveUsing(e=>e.bytes?.ToBase64()));
+            cfg.CreateMap<PhotoModel, Photo>()
+                .ForMember(e => e.bytes, opts => opts.ResolveUsing(m => m.src?.FromBase64ToByteArray()))
+                .ForMember(e => e.Customer,opts => opts.Ignore());
+
+            return cfg;
         }
     }
 }

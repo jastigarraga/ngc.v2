@@ -15,3 +15,5 @@ D:\Proyectos\NGC\NGC.Console\obj\Debug\netcoreapp1.1\NGC.Console.csprojResolveAs
 D:\Proyectos\NGC\NGC.Console\obj\Debug\netcoreapp1.1\NGC.Console.AssemblyInfo.cs
 D:\Proyectos\NGC\NGC.Console\obj\Debug\netcoreapp1.1\NGC.Console.dll
 D:\Proyectos\NGC\NGC.Console\obj\Debug\netcoreapp1.1\NGC.Console.pdb
+D:\Proyectos\NGC\NGC.Console\obj\Debug\netcoreapp1.1\NGC.Console.csproj.CoreCompileInputs.cache
+D:\Proyectos\NGC\NGC.Console\obj\Debug\netcoreapp1.1\NGC.Console.AssemblyInfoInputs.cache

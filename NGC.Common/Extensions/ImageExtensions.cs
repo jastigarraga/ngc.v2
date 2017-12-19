@@ -41,5 +41,14 @@ namespace NGC.Common.Extensions
             }
             return base64;
         }
+        public static string ToBase64(this byte[] bytes)
+        {
+           return  Convert.ToBase64String(bytes ?? new byte[] { });
+        }
+
+        public static byte[] FromBase64ToByteArray(this string base64)
+        {
+            return Convert.FromBase64String(base64);
+        }
     }
 }

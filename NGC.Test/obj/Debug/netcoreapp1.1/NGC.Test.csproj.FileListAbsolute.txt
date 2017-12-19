@@ -20,3 +20,5 @@ D:\Proyectos\NGC\NGC.Test\bin\Debug\netcoreapp1.1\NGC.Model.dll
 D:\Proyectos\NGC\NGC.Test\bin\Debug\netcoreapp1.1\NGC.Model.pdb
 D:\Proyectos\NGC\NGC.Test\bin\Debug\netcoreapp1.1\NGC.Common.dll
 D:\Proyectos\NGC\NGC.Test\bin\Debug\netcoreapp1.1\NGC.Common.pdb
+D:\Proyectos\NGC\NGC.Test\obj\Debug\netcoreapp1.1\NGC.Test.csproj.CoreCompileInputs.cache
+D:\Proyectos\NGC\NGC.Test\obj\Debug\netcoreapp1.1\NGC.Test.AssemblyInfoInputs.cache

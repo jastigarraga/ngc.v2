@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
       "AutoMapper/6.1.1": {
@@ -4544,6 +4544,12 @@
           "NGC.Common": "1.0.0",
           "NGC.DAL": "1.0.0",
           "System.Linq.Dynamic.Core": "1.0.7.3"
+        },
+        "compile": {
+          "bin/placeholder/NGC.BLL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NGC.BLL.dll": {}
         }
       },
       "NGC.Common/1.0.0": {
@@ -4556,6 +4562,12 @@
           "NGC.Model": "1.0.0",
           "ZKWeb.System.Drawing": "3.0.0",
           "runtime.linux-x64.CoreCompat.System.Drawing": "1.0.0-beta009"
+        },
+        "compile": {
+          "bin/placeholder/NGC.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NGC.Common.dll": {}
         }
       },
       "NGC.DAL/1.0.0": {
@@ -4568,6 +4580,12 @@
           "NGC.Model": "1.0.0",
           "Pomelo.EntityFrameworkCore.MySql": "1.1.2",
           "System.Linq.Dynamic.Core": "1.0.7.3"
+        },
+        "compile": {
+          "bin/placeholder/NGC.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NGC.DAL.dll": {}
         }
       },
       "NGC.Model/1.0.0": {
@@ -4575,6 +4593,12 @@
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2"
+        },
+        "compile": {
+          "bin/placeholder/NGC.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NGC.Model.dll": {}
         }
       },
       "NGC.UI/1.0.0": {
@@ -4597,6 +4621,12 @@
           "NGC.Model": "1.0.0",
           "Newtonsoft.Json": "10.0.3",
           "System.Linq.Dynamic.Core": "1.0.7.3"
+        },
+        "compile": {
+          "bin/placeholder/NGC.UI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NGC.UI.dll": {}
         }
       }
     }
@@ -11848,57 +11878,80 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\josua\\.nuget\\packages\\": {}
+    "C:\\Users\\josua\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "D:\\Proyectos\\NGC\\NGC.Test\\NGC.Test.csproj",
       "projectName": "NGC.Test",
       "projectPath": "D:\\Proyectos\\NGC\\NGC.Test\\NGC.Test.csproj",
+      "packagesPath": "C:\\Users\\josua\\.nuget\\packages\\",
       "outputPath": "D:\\Proyectos\\NGC\\NGC.Test\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\josua\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+      ],
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
             "D:\\Proyectos\\NGC\\NGC.DAL\\NGC.DAL.csproj": {
               "projectPath": "D:\\Proyectos\\NGC\\NGC.DAL\\NGC.DAL.csproj"
             },
-            "D:\\Proyectos\\NGC\\NGC.Model\\NGC.Model.csproj": {
-              "projectPath": "D:\\Proyectos\\NGC\\NGC.Model\\NGC.Model.csproj"
-            },
             "D:\\Proyectos\\NGC\\NGC.UI\\NGC.UI.csproj": {
               "projectPath": "D:\\Proyectos\\NGC\\NGC.UI\\NGC.UI.csproj"
             },
             "D:\\Proyectos\\NGC\\NGC.BLL\\NGC.BLL.csproj": {
               "projectPath": "D:\\Proyectos\\NGC\\NGC.BLL\\NGC.BLL.csproj"
+            },
+            "D:\\Proyectos\\NGC\\NGC.Model\\NGC.Model.csproj": {
+              "projectPath": "D:\\Proyectos\\NGC\\NGC.Model\\NGC.Model.csproj"
             }
           }
         }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
       }
     },
     "frameworks": {
       "netcoreapp1.1": {
         "dependencies": {
-          "MSTest.TestFramework": {
-            "target": "Package",
-            "version": "1.1.11"
-          },
           "MSTest.TestAdapter": {
             "target": "Package",
-            "version": "1.1.11"
+            "version": "[1.1.11, )"
           },
-          "Microsoft.NETCore.App": {
+          "MSTest.TestFramework": {
             "target": "Package",
-            "version": "1.1.2",
-            "autoReferenced": true
+            "version": "[1.1.11, )"
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
-            "version": "15.0.0"
+            "version": "[15.0.0, )"
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "[1.1.2, )",
+            "autoReferenced": true
           }
         }
       }

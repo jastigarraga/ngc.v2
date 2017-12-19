@@ -15,26 +15,26 @@ namespace NGC.BLL.Base
             this.repository = new BaseRepository<T>(context);
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             repository.Delete(entity);
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return repository.QueryAll;
         }
 
-        public void Insert(T entity)
+        public virtual void Insert(T entity)
         {
             repository.Insert(entity);
         }
-        public void Save()
+        public virtual void Save()
         {
             repository.Save();
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             repository.Update(entity);
         }

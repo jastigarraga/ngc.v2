@@ -11,13 +11,13 @@ namespace NGC.Common.Helpers
     {
         public static Password Hash(string password, byte[] salt = null)
         {
-            if(password == null)
+            if (password == null)
             {
                 return null;
             }
-            if(salt == null)
+            if (salt == null)
             {
-                using(var rnd = RandomNumberGenerator.Create())
+                using (var rnd = RandomNumberGenerator.Create())
                 {
                     salt = new byte[128 / 8];
                     rnd.GetBytes(salt);

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using NGC.BLL.Interfaces;
+using NGC.DAL.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +17,7 @@ namespace NGC.BLL
             services.AddTransient<IConfigurationBLL, ConfigurationBLL>();
             services.AddTransient<IEmailTemplateBLL, EmailTemplateBLL>();
             services.AddTransient<IMerakiTextImageBLL, MerakiTextImageBLL>();
+            services.AddTransient<IPhotoBLL, PhotoBLL>();
         }
         public static IServiceCollection ConfigureBLL(this IServiceCollection services)
         {

@@ -30,6 +30,7 @@ namespace NGC.DAL.Base
             MerakiEntityMappings.MapConfiguration(modelBuilder);
             MerakiEntityMappings.MapEmailTemplate(modelBuilder);
             MerakiEntityMappings.MapMerakiImage(modelBuilder);
+            MerakiEntityMappings.MapMerakiPhoto(modelBuilder);
         }
     }
 }

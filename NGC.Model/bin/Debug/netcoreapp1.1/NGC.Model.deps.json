@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v1.1": {
-      "ngc.model/1.0.0": {
+      "NGC.Model/1.0.0": {
         "runtime": {
           "NGC.Model.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "ngc.model/1.0.0": {
+    "NGC.Model/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

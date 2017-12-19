@@ -20,7 +20,7 @@ angular.module("Meraki.UI", ["ngAnimate", "ngMaterial"])
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('authInterceptor');
     }])
-angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
+angular.module("MerakiApp", ["Meraki.UI", "ngRoute","ngResource"])
     .config(function ($mdDateLocaleProvider) {
         $mdDateLocaleProvider.formatDate = function (date) {
             if (typeof date === "undefined") {
@@ -33,6 +33,51 @@ angular.module("MerakiApp", ["Meraki.UI", "ngRoute"])
             return day + "/" + month + "/" + year;
         };
     })
+    .factory("Photos", ["$resource", function ($resource) {
+        return $resource(ApiRoutes.Photos, null, {
+            "update": {
+                method: "PUT"
+            },
+            create: {
+                method: "POST"
+            },
+            query: {
+                method: "GET",
+                isArray:true
+            }
+        });
+    }])
+    .factory("Customers", ["$resource", function ($resource) {
+        return $resource(ApiRoutes.Customers, null, {
+            query: {
+                method:"GET",
+                isArray: true,
+                transformRequest: function (data, headers) {
+                    debugger;
+                    return data.Data;
+                }
+            }
+        });
+    }])
+    .controller("MerakiPhotosController", ["Photos", "Customers", "$scope", function (Photos, Customers, $scope) {
+        $scope.selectedFiles = [];
+        $scope.fileAdded = function (e) {
+            if (typeof $scope.files !== "undefined") {
+                for (var i = 0; i < $scope.files.length; i++) {
+                    $scope.selectedFiles.push({
+                        IdCustomer:$scope.IdCustomer,
+                        File: $scope.files[i],
+                        Title:"Título"
+                    });
+                }
+            }
+        };
+        $scope.upload = function () {
+            var fd = new FormData();
+            fd.append("photos", $scope.selectedFiles);
+            Photos.create(fd);
+        }
+    }])
     .controller("MerakiMainController", ["$scope", "$mdSidenav", "$mdDialog", function ($scope, $mdSidenav, $mdDialog) {
         $scope.$on("meraki-alert", function (evt,data) {
             $mdDialog.show(

@@ -20,7 +20,8 @@
             EmailConfig: "@Html.Raw(Url.Action("emailconfig","api"))",
             Templates: "@Html.Raw(Url.Action("templates","api"))",
             ApiMerakiImages: "@Html.Raw(Url.Action("merakiimage", "api"))",
-            ComboMerakiImages:"@Html.Raw(Url.Action("merakiimagecombo","api"))"
+            ComboMerakiImages: "@Html.Raw(Url.Action("merakiimagecombo","api"))",
+            Photos:"@Html.Raw(Url.Action("photo","api"))"
         }
             var Templates = {
             EditorBase:"@Html.Raw(Url.Action("EditorBase","Template"))",
@@ -48,6 +49,7 @@
     <script src="~/node_modules/angular-messages/angular-messages.min.js"></script>
     <script src="~/node_modules/angular-material/angular-material.js"></script>
     <script src="~/node_modules/jquery-touch-events/index.js"></script>
+    <script src="~/node_modules/angular-resource/angular-resource.min.js"></script>
     <script src="~/app/Meraki.App.js"></script>
 </head>
 <body ng-app="MerakiApp" ng-controller="MerakiMainController" layout="column" layout-align-sm="start stretch">

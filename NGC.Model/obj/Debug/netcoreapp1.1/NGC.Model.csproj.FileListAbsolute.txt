@@ -5,3 +5,5 @@ D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp1.1\NGC.Model.AssemblyInfo.cs
 D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp1.1\NGC.Model.dll
 D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp1.1\NGC.Model.pdb
 D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp1.1\NGC.Model.csprojResolveAssemblyReference.cache
+D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp1.1\NGC.Model.csproj.CoreCompileInputs.cache
+D:\Proyectos\NGC\NGC.Model\obj\Debug\netcoreapp1.1\NGC.Model.AssemblyInfoInputs.cache

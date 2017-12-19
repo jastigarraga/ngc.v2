@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace NGC.DAL.Base
 {
-    public class BaseRepository<T> where T : Entity
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         protected readonly MerakiContext context;
 
@@ -25,6 +25,8 @@ namespace NGC.DAL.Base
                 return context.Set<T>();
             }
         }
+
+        public IQueryable<T> All => QueryAll;
 
         public void Insert(T entity)
         {
@@ -50,5 +52,6 @@ namespace NGC.DAL.Base
         {
             context.Attach(entity);
         }
+
     }
 }

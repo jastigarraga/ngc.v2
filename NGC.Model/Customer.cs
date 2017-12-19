@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace NGC.Model
 {
@@ -26,6 +28,9 @@ namespace NGC.Model
         public int ChildrenCount { get; set; }
 
         public virtual EmailTemplate Template {get;set;}
+
+        public virtual ICollection<Photo> Photos { get; set; }
+
         public enum MaritalStates
         {
             Unknown = 0,

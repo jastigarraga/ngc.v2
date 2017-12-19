@@ -15,3 +15,5 @@ D:\Proyectos\NGC\NGC.UI\obj\Debug\netcoreapp1.1\NGC.UI.dll
 D:\Proyectos\NGC\NGC.UI\obj\Debug\netcoreapp1.1\NGC.UI.pdb
 D:\Proyectos\NGC\NGC.UI\bin\Debug\netcoreapp1.1\NGC.Common.dll
 D:\Proyectos\NGC\NGC.UI\bin\Debug\netcoreapp1.1\NGC.Common.pdb
+D:\Proyectos\NGC\NGC.UI\obj\Debug\netcoreapp1.1\NGC.UI.csproj.CoreCompileInputs.cache
+D:\Proyectos\NGC\NGC.UI\obj\Debug\netcoreapp1.1\NGC.UI.AssemblyInfoInputs.cache

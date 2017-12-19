@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using System.Linq;
 using System.Reflection;
 using NGC.Common.Extensions;
+using NGC.Common;
 
 namespace NGC.Console
 {
@@ -22,7 +23,10 @@ namespace NGC.Console
         private static IServiceProvider serviceProvider;
         static void Main(string[] args)
         {
-            foreach(string arg in args)
+
+            var scheduler = new Scheduler();
+            scheduler.GetTasks();
+            foreach (string arg in args)
             {
                 WriteLine(arg);
             }

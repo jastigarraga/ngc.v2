@@ -25,6 +25,20 @@ namespace NGC.DAL.Base
 
             });
         }
+        public static void MapMerakiPhoto(ModelBuilder builder)
+        {
+            builder.Entity<Photo>(b => {
+                b.ForMySqlToTable("meraki_photo");
+
+                b.HasKey(p => p.Id);
+                b.Property(p => p.Path);
+                b.Property(p => p.IdCustomer);
+
+                b.HasOne(p => p.Customer)
+                    .WithMany(u => u.Photos)
+                    .HasForeignKey(p => p.IdCustomer);
+            });
+        }
         public static void MapUser(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>((build)=> {

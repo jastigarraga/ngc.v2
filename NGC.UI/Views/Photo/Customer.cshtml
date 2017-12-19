@@ -1,0 +1,16 @@
+﻿@using NGC.Model
+@model Customer
+<div layout="column">
+    <h2>@Model.Surname1 @Model.Surname2, @Model.Name</h2>
+    <div ng-controller="MerakiPhotosController" flex>
+        <input type="file" accept="image/*" ng-model="files" meraki-file-input ng-change="fileAdded($evt)"/>
+        <ul>
+            <li ng-repeat="f in selectedFiles">{{f}}</li>
+        </ul>
+        <button ng-click="upload()">Subir</button>
+    </div>
+</div>
+
+@section Scripts{ 
+    <script src="~/app/meraki-file-input/meraki-file-input.js"></script>
+}

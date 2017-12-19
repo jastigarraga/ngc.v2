@@ -139,6 +139,28 @@ namespace NGC.DAL.Migrations
                     b.HasAnnotation("MySql:TableName", "meraki_text_image");
                 });
 
+            modelBuilder.Entity("NGC.Model.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("IdCustomer");
+
+                    b.Property<string>("Path");
+
+                    b.Property<string>("Title");
+
+                    b.Property<byte[]>("bytes");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCustomer");
+
+                    b.ToTable("Photo");
+
+                    b.HasAnnotation("MySql:TableName", "meraki_photo");
+                });
+
             modelBuilder.Entity("NGC.Model.User", b =>
                 {
                     b.Property<int>("Id")
@@ -170,6 +192,14 @@ namespace NGC.DAL.Migrations
                     b.HasOne("NGC.Model.EmailTemplate", "Template")
                         .WithMany("Customers")
                         .HasForeignKey("IdTemplate");
+                });
+
+            modelBuilder.Entity("NGC.Model.Photo", b =>
+                {
+                    b.HasOne("NGC.Model.Customer", "Customer")
+                        .WithMany("Photos")
+                        .HasForeignKey("IdCustomer")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }
